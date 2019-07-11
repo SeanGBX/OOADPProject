@@ -1,0 +1,42 @@
+#myUL {
+    list-style-type: none;
+    padding: 0;
+    margin: 0;
+}
+button{
+    font-size: 100%;
+    font-family: inherit;
+    border-style: solid;
+    border-right: none;
+    border-left: none;
+    border-width: 1px;
+    border-bottom: 1px solid #ddd;
+    border-top: none;
+    background-color: white;
+    text-shadow: none;
+    width: 100%;
+    text-align: left;
+    border-image: 0;
+    border-color: #ddd;
+    align-items: inherit;
+    letter-spacing: 0;
+    word-spacing: 0;
+    text-rendering: inherit;
+
+}
+#myUL li button {
+    margin-top: 0px;
+    padding: 12px;
+    text-decoration: none;
+    font-size: 18px;
+    color: black;
+    display: block;
+    -webkit-appearance: none !important;
+
+}
+
+
+
+#myUL li button:hover:not(.header) {
+    background-color: #eee;
+}

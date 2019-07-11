@@ -1,0 +1,45 @@
+#myUL {
+    list-style-type: none;
+    padding: 0;
+    margin: 0;
+}
+
+#myUL li a {
+    border-bottom: 1px solid #ddd;
+    margin-top: -1px;
+    padding: 12px;
+    text-decoration: none;
+    font-size: 18px;
+    color: black;
+    display: block;
+}
+
+#myUL li a:hover:not(.header) {
+    background-color: #eee;
+}
+.cate{
+    display:inline-block; 
+    font-weight:normal;
+}
+
+#myUL2{
+    list-style-type: none;
+    padding: 0;
+    margin: 0;
+}
+img{
+    width: 30px;
+    margin-right: 8px; 
+    display:inline-block; 
+    margin-bottom:7px;
+}
+
+#myUL2 li{
+    border-bottom: 1px solid #ddd;
+    margin-top: -1px;
+    padding: 12px;
+    text-decoration: none;
+    font-size: 18px;
+    color: black;
+    display: block;
+}

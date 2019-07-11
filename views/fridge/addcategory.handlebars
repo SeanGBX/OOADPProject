@@ -1,0 +1,14 @@
+<link rel="stylesheet" href="/css/category.css">
+<div class="card" style="margin-top: 30px">
+    <div><h3 style="display:inline-block; padding-left:16px; padding-top:10px;">Select a category</h3>
+    <a href="/fridge/editcategory" style="display:inline-block; float: right; padding-right:16px; padding-top:10px;">Edit</a></div>
+    
+    <div class="card-body">
+        <ul id="myUL">
+        {{#each foodcategory}}
+        <li><div class="card-text"><a href="/fridge/addfood/{{foodcategory}}"><img src="/img/add2.png"><h5 class="cate">{{foodcategory}}</h5></a></div></li>
+        {{/each}}
+
+        </ul>
+    </div>
+</div>

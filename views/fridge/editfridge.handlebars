@@ -1,0 +1,31 @@
+<link rel="stylesheet" href="/css/listfridge.css">
+<div class="card" style="margin-top: 30px">
+    <h3 style="padding-left:16px; padding-top:10px;  text-decoration:underline;">Your Fridge</h3>
+    <div class="card-body">
+        {{#categories}}
+        <div class="accordion" id="foodAccordion{{DISTINCT}}">
+            <button class="btn btn-link" type="button" data-toggle="collapse" data-target="#food{{DISTINCT}}"
+                aria-expanded="false" aria-controls="collapseOne">
+                {{DISTINCT}}
+                <i class="fas fa-chevron-down"></i>
+            </button>
+            <div id="food{{DISTINCT}}" class="collapse show" aria-labelledby="headingOne"
+                data-parent="#foodAccordion{{DISTINCT}}">
+
+
+                <div style="padding-left: 16px;" class="menu2">
+                    <ul id="myUL">
+                        {{#each ../fridges}}
+                        {{{editcheckcategory ../DISTINCT category fooditem expirydate id}}}
+                        {{/each}}
+                        <li>
+                </div>
+                </li>
+                </ul>
+            </div>
+        </div>
+        {{/categories}}
+
+    </div>
+</div>
+<div style="text-align:center; padding-top:15px;"><a class="btn btn-danger" href="/fridge/listfridge" style="color: white; margin-right:50px;">Cancel</a></div>

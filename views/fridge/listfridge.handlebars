@@ -1,0 +1,45 @@
+
+<link rel="stylesheet" href="/css/listfridge.css">
+<div class="card shadow-sm p-3 mb-5 bg-white rounded" style="margin-top: 30px">
+    <div>
+        <h3 style="display:inline-block; padding-left:16px; padding-top:10px; text-decoration:underline;">Your Fridge</h3>
+        <a href="/fridge/editfridge"    
+            style="display:inline-block; float:right; padding-right:16px; padding-top:10px;">Edit</a>
+    </div>
+    <div class="card-body">
+        {{#categories}}
+        <div class="accordion" id="foodAccordion{{DISTINCT}}" style="padding-bottom:10px;">
+            <button class="btn btn-link collapsed" type="button" data-toggle="collapse" data-target="#food{{DISTINCT}}"
+                aria-expanded="false" aria-controls="collapseOne">
+                {{DISTINCT}}
+            </button>
+            <div id="food{{DISTINCT}}" class="collapse" aria-labelledby="headingOne"
+                data-parent="#foodAccordion{{DISTINCT}}">
+
+
+                <div style="padding-left: 16px;" class="menu2">
+                    <ul id="myUL">  
+                        <li>
+                            <div class="card-text"><a href="/fridge/addfood/{{DISTINCT}}" style="color: blue;"><img src="/img/add.png"
+                                        style="width: 22px;margin-right: 8px; margin-bottom:4px;">Add Food to {{DISTINCT}}</a></div>
+                        {{#each ../fridges}}
+                        {{{checkcategory ../DISTINCT category fooditem expirydate}}}
+                        {{/each}}
+                        
+                </div>
+                </li>
+                </ul>
+            </div>
+        </div>
+        {{/categories}}
+
+        <ul id="myUL">
+            <li>
+                <div class="card-text"><a href="/fridge/addcategory"><img src="/img/add.png"
+                            style="width: 28px;margin-right: 8px; display:inline-block;" >
+                        <h5 style="display:inline-block; font-weight:normal; color: blue;">Add Category</h5>
+                    </a></div>
+            </li>
+        </ul>
+    </div>
+</div>

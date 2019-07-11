@@ -1,0 +1,71 @@
+#myUL {
+    list-style-type: none;
+    padding: 0;
+    margin: 0;
+}
+
+#myUL li a {
+    border-bottom: 1px solid #ddd;
+    margin-top: -1px;
+    padding: 12px;
+    text-decoration: none;
+    font-size: 18px;
+    color: black;
+    display: block;
+}
+
+#myUL li a:hover:not(.header) {
+    background-color: #eee;
+}
+#addcat{
+    margin-top: -1px;
+    padding: 12px;
+    text-decoration: none;
+    font-size: 18px;
+    color: black;
+    display: block;
+    list-style-type: none;
+}
+.btn-link{
+    color: black;
+    text-decoration:none;
+}
+.btn.btn-link{
+    text-decoration:none;
+    font-size: 22px;
+}
+.btn.btn-link:hover{
+    text-decoration: none;
+    color: grey;
+}
+.btn.btn-link.collapsed{
+    text-decoration: none;
+
+}
+a#button {
+    -moz-appearance: button;
+    appearance: button;
+    text-decoration: none;
+    color: white;
+    font-weight: 400;
+    text-align: center;
+    vertical-align: middle;
+    user-select: none;
+    border: 1px solid transparent;
+    padding: .375rem .75rem;
+    font-size: 1rem;
+    line-height: 1.5;
+    display: inline-block;
+}
+.accordion .btn.btn-link:after {
+    font-family: 'Arial Unicode MS', 'Consolas';
+    /* symbol for "opening" panels */
+    content: "◢";    /* adjust as needed, taken from bootstrap.css */
+
+
+}
+.accordion .btn.btn-link.collapsed:after {
+    /* symbol for "collapsed" panels */
+    content: " ▶";    /* adjust as needed, taken from bootstrap.css */
+}
+

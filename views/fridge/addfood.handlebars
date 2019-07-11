@@ -1,0 +1,36 @@
+<link rel="stylesheet" href="/css/addfood.css">
+<div class="card" style="margin-top: 30px">
+    <h3 style="padding-left:16px; padding-top:10px;  text-decoration:underline;">Choose your food item</h3>
+    <div class="card-body">
+        <input style="background-image: url(/img/searchicon.png);background-position: 10px 12px;background-repeat: no-repeat;height:100%;width: 100%;font-size: 16px;padding: 12px 20px 12px 40px;border: 1px solid #ddd;margin-bottom: 12px;" type="text" id="myInput" onkeyup="searchFood()" placeholder="Search for food..">
+        <form action="" method="post">
+        <ul id="myUL" style="list-style-type: none;">
+            {{#each fooddatabase}}
+               <li><button name="food" id="food" type="submit" value="{{fooditem}}">{{fooditem}}</button></li>
+            {{/each}}
+        </ul>
+        </form>
+    </div>
+</div>
+
+<script>
+    function searchFood() {
+        // Declare variables
+        var input, filter, ul, li, a, i, txtValue;
+        input = document.getElementById('myInput');
+        filter = input.value.toUpperCase();
+        ul = document.getElementById("myUL");
+        li = ul.getElementsByTagName('li');
+
+        // Loop through all list items, and hide those who don't match the search query
+        for (i = 0; i < li.length; i++) {
+            a = li[i].getElementsByTagName("button")[0];
+            txtValue = a.textContent || a.innerText;
+            if (txtValue.toUpperCase().indexOf(filter) > -1) {
+                li[i].style.display = "";
+            } else {
+                li[i].style.display = "none";
+            }
+        }
+    }
+</script>
