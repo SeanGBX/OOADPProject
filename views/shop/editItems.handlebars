@@ -1,0 +1,152 @@
+<!--.col-	.col-sm-	.col-md-	.col-lg-	.col-xl- -->
+<div class="container">
+    <div class="card card-body">
+        <h3>Edit Item</h3>
+        <form action="/shop/saveEditedItem/{{shop.id}}?_method=PUT" method="post">
+			<input type="hidden" name="_method" value="PUT">
+            <div class="form-group">
+
+                <div class="form-group mb-4">
+                    <label class="font-italic" for="title">Item Name</label>
+                    <textarea class="form-control" id="title" name="title" rows="1" value="{{shop.title}}">{{shop.title}}</textarea>
+                </div>
+
+
+            </div>
+            <div class="form-group mb-4">
+                <label class="font-italic" for="story">Description</label>
+                <textarea class="form-control" id="story" name="story" rows="7" value="{{shop.story}}">{{shop.story}}</textarea>
+            </div>
+
+            <div class="form-group mb-4">
+                <label class="font-italic" for="link">Website</label>
+                <textarea class="form-control" id="link" name="link" rows="1" value="{{shop.link}}">{{shop.link}}</textarea>
+            </div>
+
+            {{!-- <div class="form-group mb-4">
+                <label class="font-italic" for="logo">Branding</label>
+                <input type="file" id="posterUpload" name="posterUpload" accept="image/png, image/jpeg,image/jpg,image/gif">
+                <br>
+                <img src="{{shop.posterURL}}" id="posterURL" name="posterURL" src="#"  height=300 width=200 value="{{shop.posterURL}}">
+                <div class="font-weight-bold text-danger small" id="posterErr" style="display: none"></div>
+                {{!-- <textarea class="form-control" id="logo" name="logo" rows="1" value="{{shop.logo}}"></textarea> --}}
+            {{!-- </div> --}}
+
+            {{!-- <div class="form-group mb-4">
+                <label class="font-italic" for="display">Product</label>
+                <input type="file" id="posterUpload2" name="posterUpload2" accept="image/png, image/jpeg,image/jpg,image/gif" target="_top" />
+                <br>
+                <img src="{{shop.posterURL2}}" id="posterURL2" name="posterURL2" src="#" target="_blank" value="{{shop.posterURL2}}" height=300 width=200>
+                <div class="font-weight-bold text-danger small" id="posterErr" style="display: none"></div>
+                {{!-- <textarea class="form-control" id="display" name="display" rows="1" value="{{shop.display}}"></textarea> --}}
+            {{!-- </div> --}}
+
+            <div class="col-lg-3 mb-4">
+					<input type="file" id="posterUpload" name="posterUpload" accept="image/png,
+															image/jpeg,image/jpg,image/gif">
+					<a href="{{shop.posterURL}}" data-title="{{shop.title}}" data-toggle="lightbox">
+						<img id="poster" {{#if shop.posterURL}} src="{{shop.posterURL}}" {{else}} src="/images/no-image.jpg"  {{/if}} alt=""
+							 name="posterURL" class="border img-thumbnail img-fluid" height=300 width=200>
+					</a>
+					<input id="posterURL" type="hidden" name="posterURL" value="{{shop.posterURL}}">
+					<div class="font-weight-bold text-danger small" id="posterErr" style="display:none"></div>
+				</div>
+
+            <div class="col-lg-3 mb-4">
+					<input type="file" id="posterUpload2" name="posterUpload2" accept="image/png,
+															image/jpeg,image/jpg,image/gif" target="_top">
+					<a href="{{shop.posterURL2}}" data-title="{{shop.title}}" data-toggle="lightbox2">
+						<img id="poster2" {{#if shop.posterURL2}} src="{{shop.posterURL2}}" {{else}} src="/images/no-image.jpg"  {{/if}} alt=""
+							 name="posterURL2" class="border img-thumbnail img-fluid" height=300 width=200 target="_blank">
+					</a>
+					<input id="posterURL2" type="hidden" name="posterURL2" value="{{shop.posterURL2}}">
+					<div class="font-weight-bold text-danger small" id="posterErr2" style="display:none"></div>
+				</div>
+
+            {{!-- <div>
+                <input type ="file" id ="file" name="file" onchange="getFile(event)" style="width: 100%" />
+            </div> --}}
+
+
+
+    </div>
+    <br>
+    <button id="butAddVideo" type="submit" class="btn btn-primary">Save
+    </button>
+    </form>
+</div>
+</div>
+
+{{!-- 
+<script type="text/javascript">
+        window.addEventListener('load', function() {
+  document.querySelector('input[type="file"]').addEventListener('change', function() {
+      if (this.files && this.files[0]) {
+          var img = document.querySelector('img');  // $('img')[0]
+          img.src = URL.createObjectURL(this.files[0]); // set src to file url
+      }
+  });
+});
+
+window.addEventListener('load', function() {
+  document.querySelector('input[target="_top"]').addEventListener('change', function() {
+      if (this.files && this.files[0]) {
+          var img = document.querySelector('img[target]');  // $('img')[0]
+          img.src = URL.createObjectURL(this.files[0]); // set src to file url
+          
+      }
+  });
+});
+
+function imageIsLoaded(e) { alert(e); }
+
+$('#posterUpload').on('change', function () {
+    let image = $("#posterUpload")[0].files[0];
+    let formdata = new FormData();
+    formdata.append('posterUpload', image);
+    $.ajax({
+        url: '/shop/upload',
+        type: 'POST',
+        data: formdata,
+        contentType: false,
+        processData: false,
+        'success': (data) => {
+            $('#poster').attr('src', data.file);
+            $('#posterURL').attr('value', data.file);
+            // sets posterURL hidden field
+            if(data.err){
+                $('#posterErr').show();
+                $('#posterErr').text(data.err.message);
+            } else{                 
+                $('#posterErr').hide();             
+            }         
+        }     
+    }); 
+});
+
+function imageIsLoaded(e) { alert(e); }
+
+$('#posterUpload2').on('change', function () {
+    let image = $("#posterUpload2")[0].files[0];
+    let formdata = new FormData();
+    formdata.append('posterUpload2', image);
+    $.ajax({
+        url: '/shop/upload',
+        type: 'POST',
+        data: formdata,
+        contentType: false,
+        processData: false,
+        'success': (data) => {
+            $('#poster2').attr('src', data.file);
+            $('#posterURL2').attr('value', data.file);
+            // sets posterURL hidden field
+            if(data.err){
+                $('#posterErr2').show();
+                $('#posterErr2').text(data.err.message);
+            } else{                 
+                $('#posterErr2').hide();             
+            }         
+        }     
+    }); 
+}); --}}
+    {{!-- </script> --}}

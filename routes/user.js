@@ -6,20 +6,11 @@ const passport = require('passport');
 var bcrypt = require('bcryptjs');
 // User register URL using HTTP post => /user/register
 
-router.get('/login', (req, res) => {
-    const title = 'Login';
-    res.render("user/login", {
-        title: title
-    })
-});
-router.get('/register', (req, res) => {
-    const title = 'Register';
-    res.render("user/register", { title: title })
-});
 
 router.post('/register', (req, res) => {
     let errors = [];
-    let { username, email, password, password2 } = req.body;
+    const title = 'Register';
+    let { username, email, password, password2, classification } = req.body;
     if (password !== password2) {
         errors.push({
             text: 'Passwords do not match'
@@ -38,7 +29,9 @@ router.post('/register', (req, res) => {
             username,
             email,
             password,
-            password2
+            password2,
+            classification,
+            title: title
         });
     } else {
         // If all is well, checks if user is already registered
@@ -52,7 +45,9 @@ router.post('/register', (req, res) => {
                         username,
                         email,
                         password,
-                        password2
+                        password2,
+                        classification,
+                        title: title
                     });
                 } else {
                     // Create new user record
@@ -62,7 +57,7 @@ router.post('/register', (req, res) => {
                             User.create({ username, email, password })
                                 .then(user => {
                                     alertMessage(res, 'success', user.username + ' added.Please login ', 'fas fa - sign - in -alt ', true);
-                                    res.redirect('/user/login');
+                                    res.redirect('/showLogin');
                                 })
                                 .catch(err => console.log(err));
                         });
@@ -73,9 +68,10 @@ router.post('/register', (req, res) => {
 });
 
 router.post('/login', (req, res, next) => {
+    const title = 'Login';
     passport.authenticate('local', {
-        successRedirect: '/fridge/listfridge', // Route to /video/listVideos URL
-        failureRedirect: '/user/login', // Route to /login URL
+        successRedirect: '/', // Route to /video/listVideos URL
+        failureRedirect: '/showLogin', // Route to /login URL
         failureFlash: true
         /* Setting the failureFlash option to true instructs Passport to flash an error
         message using the message given by the strategy's verify callback, if any.
