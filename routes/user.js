@@ -6,6 +6,16 @@ const passport = require('passport');
 var bcrypt = require('bcryptjs');
 // User register URL using HTTP post => /user/register
 
+router.get('/login', (req, res) => {
+    const title = 'Login';
+    res.render("user/login", {
+        title: title
+    })
+});
+router.get('/register', (req, res) => {
+    const title = 'Register';
+    res.render("user/register", { title: title })
+});
 
 router.post('/register', (req, res) => {
     let errors = [];
@@ -57,7 +67,7 @@ router.post('/register', (req, res) => {
                             User.create({ username, email, password })
                                 .then(user => {
                                     alertMessage(res, 'success', user.username + ' added.Please login ', 'fas fa - sign - in -alt ', true);
-                                    res.redirect('/showLogin');
+                                    res.redirect('/user/login');
                                 })
                                 .catch(err => console.log(err));
                         });
@@ -70,8 +80,8 @@ router.post('/register', (req, res) => {
 router.post('/login', (req, res, next) => {
     const title = 'Login';
     passport.authenticate('local', {
-        successRedirect: '/', // Route to /video/listVideos URL
-        failureRedirect: '/showLogin', // Route to /login URL
+        successRedirect: '/fridge/listfridge',
+        failureRedirect: '/user/login', // Route to /login URL
         failureFlash: true
         /* Setting the failureFlash option to true instructs Passport to flash an error
         message using the message given by the strategy's verify callback, if any.

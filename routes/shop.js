@@ -159,7 +159,6 @@ router.post('/addItems', (req, res) => {
     console.log('====>: posterURL', posterURL)
     let posterURL2 = req.body.posterURL2;
     console.log('====>: posterURL2', posterURL2)
-    let likes = 0
     // Multi-value components return array of strings or undefined
     Shop.create({
         title,
@@ -170,7 +169,6 @@ router.post('/addItems', (req, res) => {
         userId,
         posterURL,
         posterURL2
-        likes
     }).then((shop) => {
         res.redirect('/shop/adminShop');
     })
@@ -188,7 +186,6 @@ router.put('/saveEditedItem/:id', (req, res) => {
     let posterURL = req.body.posterURL;
     let posterURL2 = req.body.posterURL2;
     // Retrieves edited values from req.body
-    let likes = req.body.likes;
 
     console.log(`URL: ${posterURL}`);
     console.log(`URL: ${posterURL2}`);
@@ -203,7 +200,6 @@ router.put('/saveEditedItem/:id', (req, res) => {
         userId,
         posterURL,
         posterURL2
-        likes
         // Set variables here to save to the videos table
     }, {
             where: {

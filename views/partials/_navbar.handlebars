@@ -14,7 +14,6 @@
 		</button>
 		<div class="collapse navbar-collapse" id="navbarNav">
 			<ul class="navbar-nav">
-				{{#if user}}
 
 				<li class="nav-item">
 					<a class="nav-link" href="/fridge/listfridge">Fridge</a>
@@ -36,19 +35,12 @@
 
 
 
-				{{else}}
-				<li class="nav-item">
-					<a href="/showLogin" class="nav-link">Login</a>
-			</ul>
-				<li class="nav-item">
-					<a href="/showRegister" class="nav-link">Register</a>
-				</li>
-				{{/if}}
 		</div>
 	</div>
 	</ul>
 </nav>
 
+{{else}}
 <nav class="navbar navbar-expand-sm navbar-dark bg-dark-transparent">
 	<div class="container">
 		<div class="navbar-brand"><svg width="170" height="36"><g id="SvgjsG2488" featurekey="text1" fill="white"transform="matrix(1.114955352395963,0,0,1.114955352395963,3.1937724567150543,4.425225364628752)">
@@ -77,3 +69,4 @@
 	</div>
 	</ul>
 </nav>
+{{/if}}

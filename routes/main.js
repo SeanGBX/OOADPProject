@@ -32,14 +32,5 @@ router.get('/shop', (req, res) => {
 			.catch(err => console.log(err));
 });
 
-// Login User
-router.get('/showLogin', (req, res) => {
-	res.render('user/login')
-});
-
-// Register user
-router.get('/showRegister', (req, res) => {
-	res.render('user/register')
-});
 
 module.exports = router;
