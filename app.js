@@ -12,6 +12,7 @@ const bodyParser = require('body-parser');
 const flash = require('connect-flash');
 const FlashMessenger = require('flash-messenger'); 
 const passport = require('passport');
+const { radioCheck } = require('./helpers/hbs');
 
 // Bring in database connection
 const kitcheniuvoDB = require('./config/DBConnection');
@@ -29,6 +30,8 @@ authenticate.localStrategy(passport);
 const mainRoute = require('./routes/main');
 const userRoute = require('./routes/user'); 
 const fridgeRoute = require('./routes/fridge');
+const shopRoute = require('./routes/shop')
+const reminderRoute = require('./routes/reminder')
 
 
 const {editcheckcategory} = require('./helpers/editcheckcategory');
@@ -38,6 +41,9 @@ const {checkcategory} = require('./helpers/checkcategory')
 * in Node JS.
 */
 const app = express();
+
+const MySQLStore = require('express-mysql-session');
+const db = require('./config/db'); //db.js config file
 
 // Handlebars Middleware
 /*
@@ -52,7 +58,8 @@ const app = express();
 app.engine('handlebars', exphbs({
 	helpers: {
 		editcheckcategory:editcheckcategory,
-		checkcategory:checkcategory
+		checkcategory:checkcategory,
+		radioCheck: radioCheck
 	},
 	defaultLayout: 'main' // Specify default template views/layout/main.handlebar 
 }));
@@ -75,8 +82,20 @@ app.use(cookieParser());
 
 // To store session information. By default it is stored as a cookie on browser
 app.use(session({
-	key: 'session',
+	key: 'KitchenNiuvo_session',
 	secret: 'secret',
+	store: new MySQLStore({
+		host: db.host,
+		port: 3306,
+		user: db.username,
+		password: db.password,
+		database: db.database,
+		clearExpired: true,
+		// How frequently expired sessions will be cleared; milliseconds:
+		checkExpirationInterval: 900000,
+		// The maximum age of a valid session; milliseconds:
+		expiration: 900000,
+	}),
 	resave: false,
 	saveUninitialized: false,
 }));
@@ -88,6 +107,7 @@ app.use(passport.session());
 app.use(flash());
 app.use(FlashMessenger.middleware); 
 
+// Place to define global variables 
 app.use(function(req, res, next){
 	res.locals.success_msg = req.flash('success_msg');
 	res.locals.error_msg = req.flash('error_msg');
@@ -95,11 +115,6 @@ app.use(function(req, res, next){
 	res.locals.user = req.user || null;
 	next();
    });
-
-// Place to define global variables 
-app.use(function (req, res, next) {
-	next();
-});
 
 // Use Routes
 /*
@@ -109,6 +124,8 @@ app.use(function (req, res, next) {
 app.use('/', mainRoute); // mainRoute is declared to point to routes/main.js
 app.use('/user', userRoute);
 app.use('/fridge', fridgeRoute);
+app.use('/shop', shopRoute);
+app.use('/reminder', reminderRoute)
 // This route maps the root URL to any path defined in main.js
 
 /*

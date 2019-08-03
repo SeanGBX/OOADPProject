@@ -1,0 +1,51 @@
+<script src = "https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.2/jquery.min.js"></script>
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.2/js/bootstrap.min.js"></script>
+  <script src="//cdnjs.cloudflare.com/ajax/libs/bootstrap-select/1.6.3/js/bootstrap-select.min.js"></script>
+    <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/bootstrap-select/1.6.3/css/bootstrap-select.min.css" />
+<form action= "" method = "POST"  >
+<div class="col-xs-12">
+    <div class="col-md-12">
+        <h3> Actions</h3>
+        <div id="fieldcurr">
+            <div id="field0">
+                <!-- Select-->
+                <div class="form-group">
+                    <label class="col-md-4 control-label" for="action_id">Category</label>
+                    <div class="col-md-5">
+                        <select name ="foodcategory" class="form-control">
+                            {{#each foodcategory}}
+                            <option>{{foodcategory}}</option>
+                            {{/each}}
+                        </select>   
+                    </div>
+                </div>
+                <br><br>
+                <!-- Select-->
+                <div class="form-group">
+                    <label class="col-md-4 control-label" for="action_name">Food</label>
+                    <div class="col-md-5">
+                        <select name="fooditem" class="form-control">
+                            {{#each fooditem}}
+                            <option>{{fooditem}}</option>
+                            {{/each}}
+                        </select>
+
+                    </div>
+                </div>
+                <br><br>
+                <!--  Button -->
+                <div class="form-group">
+                    <label class="col-md-4 control-label" for="action_json">Measurement</label>
+                    <div class="col-md-4">
+                        <input name = "measurements" id = "measurements" class="form-control" type="text" placeholder="">
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <button type="submit" id="Add-Rem" class="btn btn-success">Submit</button>
+    <button type="button" class="btn btn-danger" onclick="window.location.href = '/reminder/listreminder'">Back</button>
+</div>
+</div>
+</form>

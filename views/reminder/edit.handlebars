@@ -1,0 +1,54 @@
+<link rel="stylesheet" href="/css/style.css">
+<h1>Editing : Monday, 6/6/2019</h1>
+<button type="button" onclick="selectun()" class="btn btn-link" id='check_all'>Select All</button>
+<form action="/reminder/saveEditedFood/{{ReminderList.id}}?_method=PUT" method="POST" id="addFood">
+<div class="pre-scrollable" style = "height:auto;" id="border   ">
+    <div class="form-check">
+        <select id ="category" name="category" value ="{{ReminderList.category}}" class="form-control"> 
+            <option>{{ReminderList.category}}</option>
+             {{#each foodcategory}}
+            <option>{{foodcategory}}</option>   
+             {{/each}}
+        </select> 
+        </div>
+        <br>
+        <div class="form-check">
+        <select id ="food" name = "food" value ="{{ReminderList.food}}" class="form-control"> 
+            <option>{{ReminderList.food}}</option>
+             {{#each fooddatabases}}
+            <option>{{fooditem}}</option>   
+            {{/each}}
+        </select> 
+        </div>
+        <br>
+        <div class="form-check">
+        <input type="text" id="quantity" name="quantity" value = "{{ReminderList.quantity}}" ></input>
+        <br><hr style="height:1px; border:none; color:#000; background-color:#000;">
+    </div>
+</div>
+<button type="submit" id = "butaddFood" class="btn btn-success">Save </button>
+<button type="button" class="btn btn-light" style="color :crimson"
+    onclick="window.location.href ='/reminder/listreminder'">Back</button>
+    </input>
+</form>
+<script>
+    var select = new Boolean(true)
+    function selectun(){
+        
+        if(select == true){
+            $('input[name=Food]').prop('checked', true);
+            select = new Boolean(false)
+        }
+        else{
+            $('input[name=Food]').prop('checked', false);
+            select = new Boolean(true)
+        }
+    };
+    $('#datepicker').datepicker({
+    format: 'dd/mm/yyyy',
+    uiLibrary: 'bootstrap4',
+});
+
+
+
+</script>

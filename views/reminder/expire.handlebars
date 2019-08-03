@@ -1,0 +1,36 @@
+<h1>Expiring Today, 6/6/2019:</h1>
+<div class="card">
+    <button type="button" class="btn btn-link" onclick="selectun()">select all</button>
+    <div class="card-body">
+        <div class="form-check">
+            <input type="checkbox" value="" id="defaultCheck1" name = "ExpFood">
+            <label class="form-check-label" for="defaultCheck1">
+                    Milk (2 cartons)
+            </label>
+        </div>
+        <h3 class = "red">Expiring Soon:</h3>
+        <div class="form-check">
+            <input type="checkbox" value="" id="defaultCheck1" name = "ExpFood">
+            <label class="form-check-label" for="defaultCheck1">
+            Cereals (1) Expiring:7/6/2019
+            </label>
+        </div>
+        <button type = "button" class = "btn btn-primary">Add to Reminder</button>
+        <button type="button" onclick="window.location.href = '/reminder/listreminder'" class="btn btn-danger">Back</button>
+    </div>
+</div>
+<script>
+    var select = new Boolean(true)
+    function selectun(){
+        
+        if(select == true){
+            $('input[name=ExpFood]').prop('checked', true);
+            select = new Boolean(false)
+        }
+        else{
+            $('input[name=ExpFood]').prop('checked', false);
+            select = new Boolean(true)
+        }
+    }
+
+</script>

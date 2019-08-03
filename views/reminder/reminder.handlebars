@@ -1,0 +1,35 @@
+<h1>Thursday, 6/6/2019</h1>
+<div class = "h-75" >
+    <button type="button" onclick="window.location.href = '/reminder/newreminder'" class="btn btn-default">New Reminders</button>
+    <button type="button" onclick="window.location.href = '/reminder/expire'" class="btn btn-info">Expiring Food</button>
+
+    <div class="card-body"  >
+        <div class="form-check" id="borderDiv" >
+            <h2>Today:</h2>
+            {{#if reminderlists}}
+            {{#each reminderlists}}
+            <a href = '/reminder/edit/{{id}}' class="btn btn-success" >edit</a>
+            <div>
+                <h3>Category:{{category}}</h3>
+                <br>
+                <h3>Food:{{food}}</h3>
+                <br>
+                <h3>Quantity:{{quantity}}</h3>
+                <br>
+                <a href = "/reminder/delete/{{id}}" class = "card-link">
+                    <i class ="far fa-trash-alt"></i>
+                    Delete
+                </a>
+                <hr style="height:1px; border:0px; color:#000; background-color:#000;">
+                {{/each}}
+                {{else}}
+                
+                {{/if}}
+
+            
+                </div>
+        </div>
+    </div>
+
+</div>
+

@@ -1,30 +1,69 @@
+<!--View for editing of category-->
 <link rel="stylesheet" href="/css/category.css">
-<div class="card" style="margin-top: 30px">
-
-    <h3 style="display:inline-block; padding-left:16px; padding-top:10px;">Select a category</h3>
-
-    
+<div class="card shadow-sm p-3 mb-5 bg-white rounded" style="margin-top: 30px">
+    <div>
+        <h3 style="display:inline-block; padding-left:16px; padding-top:10px; text-decoration:underline;">Edit Food
+            Category</h3>
+    </div>
     <div class="card-body">
         <ul id="myUL2">
-        
-        {{#each foodcategory}}
-        <li><div class="card-text"><img src="/img/add.png"><h5 class="cate"><input id="{{foodcategory}}" onblur="emptyfield(this)" placeholder= "{{foodcategory}}" value="{{foodcategory}}"></input></h5><button onclick="window.location.href='/fridge/editcategory/delete/{{id}}'" name="delfood" class="btn btn-danger btn-sm" style="float: right;"><strong>X</strong></button></div></li>
-        {{/each}}
-        <form action="" method="post">
-        <li><div class="card-text"><img src="/img/add.png"><h5 class="cate"><input id="addcategory" name="addcategory"  placeholder="Add a category"></input></h5></div></li>
+            {{#each foodcategory}}
+            <li>
+                <img src="/img/add2.png" style="display: inline">
+                    <h5 data-editable class="cate" id="{{id}}" style="display: inline">{{foodcategory}}</h5><button 
+                        onclick="window.location.href='/fridge/editcategory/delete/{{id}}'" name="delfood"
+                        class="btn btn-danger btn-sm" style="float: right; display:inline;"><strong>X</strong></button>
+                
+            </li>
+            {{/each}}
+            <form action="" method="post">
+                <li>
+                    <div class="card-text"><img src="/img/add2.png">
+                        <h5 class="cate"><input id="addcategory" name="addcategory"
+                                placeholder="Add a category"></input></h5>
+                    </div>
+                </li>
 
         </ul>
     </div>
 
-</div >
-<div style="text-align:center; padding-top:15px;"><a class="btn btn-danger" href="/fridge/addcategory" style="color: white; margin-right:50px;">Cancel</a><button type="submit" class="btn btn-info" style="color: white">Submit</button></div>
+</div>
+<div style="text-align:center; padding-top:15px;"><a class="btn btn-danger" href="/fridge/addcategory"
+        style="color: white; margin-right:50px;">Cancel</a><button type="submit" class="btn btn-info"
+        style="color: white">Submit</button></div>
 </form>
 <script>
-    function emptyfield(ele){
-    var foodid = ele.getAttribute('id');
-    var foodfield = document.getElementById(foodid).value;
-    if (foodfield === ""){
-        document.getElementById(foodid).value = document.getElementById(foodid).placeholder
+    function emptyfield(ele) {
+        var foodid = ele.getAttribute('id');
+        var foodfield = document.getElementById(foodid).value;
+        if (foodfield === "") {
+            document.getElementById(foodid).value = document.getElementById(foodid).placeholder
+        }
     }
-}
+
+    $('body').on('click', '[data-editable]', function () {
+
+        var $el = $(this);
+        var id = $($el).attr('id')
+        var $input = $('<form style="display: inline" action="/fridge/editcategory/update/' + id + '?_method=PUT" method="post" id="' + id + '"><input maxlength="50" id="foodcategory" name="foodcategory" onblur="document.getElementById(\'' + id + '\').submit(); return false;" onfocus=\"this.style.width = ((this.value.length + 2) * 9) + \'px\';\" onkeypress=\"this.style.width = ((this.value.length + 3) * 9) + \'px\';\" /></form>');
+        $el.replaceWith($input);
+        $('#foodcategory').val($el.text());
+        $('#foodcategory').focus();
+
+        var save = function () {
+            var $p = $('#foodcategory').val($el.text());
+            $input.replaceWith($p);
+
+        };
+        var $input2 = $('#foodcategory');
+        /**
+          We're defining the callback with `one`, because we know that
+          the element will be gone just after that, and we don't want 
+          any callbacks leftovers take memory. 
+          Next time `p` turns into `input` this single callback 
+          will be applied again.
+        */
+        $input2.one('blur', save).focus();
+
+    });
 </script>

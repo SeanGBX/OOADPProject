@@ -13,5 +13,9 @@ const User = db.define('user', {
     password: {
         type: Sequelize.STRING
     },
+    // class between admin and user
+    classification: {
+        type: Sequelize.STRING
+    },
 });
 module.exports = User;

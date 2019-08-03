@@ -19,7 +19,8 @@ router.get('/register', (req, res) => {
 
 router.post('/register', (req, res) => {
     let errors = [];
-    let { username, email, password, password2 } = req.body;
+    const title = 'Register';
+    let { username, email, password, password2, classification } = req.body;
     if (password !== password2) {
         errors.push({
             text: 'Passwords do not match'
@@ -38,7 +39,9 @@ router.post('/register', (req, res) => {
             username,
             email,
             password,
-            password2
+            password2,
+            classification,
+            title: title
         });
     } else {
         // If all is well, checks if user is already registered
@@ -52,7 +55,9 @@ router.post('/register', (req, res) => {
                         username,
                         email,
                         password,
-                        password2
+                        password2,
+                        classification,
+                        title: title
                     });
                 } else {
                     // Create new user record
@@ -73,8 +78,9 @@ router.post('/register', (req, res) => {
 });
 
 router.post('/login', (req, res, next) => {
+    const title = 'Login';
     passport.authenticate('local', {
-        successRedirect: '/fridge/listfridge', // Route to /video/listVideos URL
+        successRedirect: '/fridge/listfridge',
         failureRedirect: '/user/login', // Route to /login URL
         failureFlash: true
         /* Setting the failureFlash option to true instructs Passport to flash an error

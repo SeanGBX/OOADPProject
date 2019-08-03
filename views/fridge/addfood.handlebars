@@ -1,3 +1,4 @@
+<!--View for adding of food-->
 <link rel="stylesheet" href="/css/addfood.css">
 <div class="card" style="margin-top: 30px">
     <h3 style="padding-left:16px; padding-top:10px;  text-decoration:underline;">Choose your food item</h3>
@@ -14,6 +15,7 @@
 </div>
 
 <script>
+    // search function
     function searchFood() {
         // Declare variables
         var input, filter, ul, li, a, i, txtValue;
@@ -21,7 +23,7 @@
         filter = input.value.toUpperCase();
         ul = document.getElementById("myUL");
         li = ul.getElementsByTagName('li');
-
+        
         // Loop through all list items, and hide those who don't match the search query
         for (i = 0; i < li.length; i++) {
             a = li[i].getElementsByTagName("button")[0];

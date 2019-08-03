@@ -1,21 +1,26 @@
+<!--View for editing of fridge-->
 <link rel="stylesheet" href="/css/listfridge.css">
-<div class="card" style="margin-top: 30px">
-    <h3 style="padding-left:16px; padding-top:10px;  text-decoration:underline;">Your Fridge</h3>
+<div class="card shadow-sm p-3 mb-5 bg-white rounded" style="margin-top: 30px">
+    <div class="row">
+        <div class="col-sm-6 col-md-5 col-lg-3">
+        <h3 style="padding-left:16px; padding-top:10px; text-decoration:underline;">Your Fridge</h3>
+        </div>
+        <div class="col-sm-6 col-md-7 col-lg-9">
+        <a href="/fridge/listfridge" style="display:inline-block; float:right; padding-right:16px; padding-top:10px;">Done</a>
+        </div>
+    </div>
     <div class="card-body">
         {{#categories}}
         <div class="accordion" id="foodAccordion{{DISTINCT}}">
             <button class="btn btn-link" type="button" data-toggle="collapse" data-target="#food{{DISTINCT}}"
                 aria-expanded="false" aria-controls="collapseOne">
                 {{DISTINCT}}
-                <i class="fas fa-chevron-down"></i>
             </button>
             <div id="food{{DISTINCT}}" class="collapse show" aria-labelledby="headingOne"
                 data-parent="#foodAccordion{{DISTINCT}}">
-
-
                 <div style="padding-left: 16px;" class="menu2">
                     <ul id="myUL">
-                        {{#each ../fridges}}
+                        {{#each ../fridges}}                        
                         {{{editcheckcategory ../DISTINCT category fooditem expirydate id}}}
                         {{/each}}
                         <li>
@@ -28,4 +33,34 @@
 
     </div>
 </div>
-<div style="text-align:center; padding-top:15px;"><a class="btn btn-danger" href="/fridge/listfridge" style="color: white; margin-right:50px;">Cancel</a></div>
+
+
+
+<script>
+// editable on click
+$('body').on('click', '[data-editable]', function(){
+  
+  var $el = $(this);
+  var id = $($el).attr('id')
+  var $input = $('<form style="display: inline" action="/fridge/editfridge/update/'+ id +'?_method=PUT" method="post" id="' + id +'"><input maxlength="50" id="fooditem" name="fooditem" onblur="document.getElementById(\''+ id +'\').submit(); return false;" onfocus=\"this.style.width = ((this.value.length + 2) * 9) + \'px\';\" onkeypress=\"this.style.width = ((this.value.length + 3) * 9) + \'px\';\" /></form>');
+  $el.replaceWith($input);
+  $('input').val( $el.text() );
+  $('input').focus();
+  
+  var save = function(){
+    var $p = $('input').val( $el.text() );
+    $input.replaceWith( $p );
+    
+  };
+  var $input2 = $('input');
+  /**
+    We're defining the callback with `one`, because we know that
+    the element will be gone just after that, and we don't want 
+    any callbacks leftovers take memory. 
+    Next time `p` turns into `input` this single callback 
+    will be applied again.
+  */
+  $input2.one('blur', save).focus();
+  
+});
+</script>

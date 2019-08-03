@@ -60,12 +60,43 @@ a#button {
 .accordion .btn.btn-link:after {
     font-family: 'Arial Unicode MS', 'Consolas';
     /* symbol for "opening" panels */
-    content: "◢";    /* adjust as needed, taken from bootstrap.css */
+    content: "⮞";    /* adjust as needed, taken from bootstrap.css */
 
 
 }
 .accordion .btn.btn-link.collapsed:after {
     /* symbol for "collapsed" panels */
-    content: " ▶";    /* adjust as needed, taken from bootstrap.css */
+    content: "  ⮟";    /* adjust as needed, taken from bootstrap.css */
 }
 
+#myUL2 {
+    list-style-type: none;
+    padding: 0;
+    margin: 0;
+}
+
+#myUL2 li a {
+    margin-top: -1px;
+    padding: 12px;
+    text-decoration: none;
+    font-size: 18px;
+    color: black;
+    display: block;
+}
+
+#myUL2 li a:hover {
+    background-color: #eee;
+}
+
+.editable:hover{
+    cursor: pointer;
+}
+.input-group.md-form.form-sm.form-1 input{
+    border: 1px solid #bdbdbd;
+    border-top-right-radius: 0.25rem;
+    border-bottom-right-radius: 0.25rem;    
+    }   
+
+#basic-text1:hover{
+    cursor: pointer;
+}
