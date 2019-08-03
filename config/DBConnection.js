@@ -13,6 +13,9 @@ const setUpDB = (drop) => {
         })
         .then(() => {
             user.hasMany(shop);
+    mySQLDB.sync({ // Creates table if none exists
+        force: drop
+    }).then(() => {
             user.hasMany(fridge);
             user.hasMany(reminderlist);
             user.hasMany(foodcategory);
@@ -24,6 +27,7 @@ const setUpDB = (drop) => {
             }).catch(err => console.log(err))
         })
         .catch(err => console.log('Error: ' + err));
+    });
 };
 
 module.exports = { setUpDB };
