@@ -5,7 +5,7 @@ const alertMessage = require('../helpers/messenger');
 
 router.get('/', (req, res) => {
 	const title = 'KitchenIuvo';
-	res.render('index2', {
+	res.render('index', {
 		title: title,
 	}) // renders views/index.handlebars
 });

@@ -80,7 +80,7 @@ router.post('/register', (req, res) => {
 router.post('/login', (req, res, next) => {
     const title = 'Login';
     passport.authenticate('local', {
-        successRedirect: '/fridge/listfridge',
+        successRedirect: '/',
         failureRedirect: '/user/login', // Route to /login URL
         failureFlash: true
         /* Setting the failureFlash option to true instructs Passport to flash an error
