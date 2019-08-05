@@ -13,16 +13,16 @@ const storage = multer.diskStorage({
 });
 
 //doesn't go thru
-const storage2 = multer.diskStorage({
-	destination2: (req, file, callback) => {
-		console.log('destination2 people')
-		callback(null, './public/uploads2/');
-	},
-	filename2: (req, file, callback) => {
-		console.log("Storage2 " + file.originalname);
-		callback(null, Date.now() + path.extname(file.originalname));
-	}
-});
+// const storage2 = multer.diskStorage({
+// 	destination2: (req, file, callback) => {
+// 		console.log('destination2 people')
+// 		callback(null, './public/uploads2/');
+// 	},
+// 	filename2: (req, file, callback) => {
+// 		console.log("Storage2 " + file.originalname);
+// 		callback(null, Date.now() + path.extname(file.originalname));
+// 	}
+// });
 
 
 
@@ -42,7 +42,7 @@ const upload = multer({
 // Init Upload
 // never went thru this too
 const upload2 = multer({
-	storage2: storage2,
+	storage: storage,
 	limits: {
 		fileSize: 1000000
 	},

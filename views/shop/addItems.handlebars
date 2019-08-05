@@ -34,6 +34,11 @@
 
 {{!-- add attr multiple to select many files --}}
             <div class="col-lg-3 mb-4">
+                <label class="font-italic" for="posterURL2">Logo image link</label>
+					<textarea class="form-control" id="posterURL2" name="posterURL2" rows="1" value="{{shop.posterURL2}}"></textarea>
+				</div>
+
+            <div class="col-lg-3 mb-4">
                 <label class="font-italic" for="posterURL">Poster</label>
 					<input type="file" id="posterUpload" name="posterUpload" accept="image/png,
 															image/jpeg,image/jpg,image/gif">
@@ -45,17 +50,7 @@
 					<div class="font-weight-bold text-danger small" id="posterErr" style="display:none"></div>
 				</div>
 
-            <div class="col-lg-3 mb-4">
-                <label class="font-italic" for="posterURL2">Logo</label>
-					<input type="file" id="posterUpload2" name="posterUpload2" accept="image/png,
-															image/jpeg,image/jpg,image/gif" target="_top">
-					<a href="{{shop.posterURL2}}" data-title="{{shop.title}}" data-toggle="lightbox2">
-						<img id="poster2" {{#if shop.posterURL2}} src="{{shop.posterURL2}}" {{else}} src="/images/no-image.jpg"  {{/if}} alt=""
-							 name="posterURL2" class="border img-thumbnail img-fluid" height=300 width=200 target="_blank">
-					</a>
-					<input id="posterURL2" type="hidden" name="posterURL2" value="{{shop.posterURL2}}">
-					<div class="font-weight-bold text-danger small" id="posterErr2" style="display:none"></div>
-				</div>
+            
     </div>
     <br>
     <button id="butAddVideo" type="submit" class="btn btn-primary">Save
