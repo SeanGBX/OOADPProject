@@ -16,6 +16,9 @@ const Shop = db.define('shop', {
     },
     posterURL2: {
         type: Sequelize.STRING(512),
+    },
+    likes : {
+        type: Sequelize.INTEGER
     }
 });
 

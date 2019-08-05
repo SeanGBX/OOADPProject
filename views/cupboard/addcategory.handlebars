@@ -3,19 +3,19 @@
 <div class="card shadow-sm p-3 mb-5 bg-white rounded" style="margin-top: 30px">
     <div class="row">
         <div class="col-sm-3 col-md-3 col-lg-3">
-            <i class="fa fa-arrow-left fa-2x" style="padding-top: 10px; padding-left:10px;" aria-hidden="true" onclick="window.location.href='/fridge/listfridge'"></i>
+            <i class="fa fa-arrow-left fa-2x" style="padding-top: 10px; padding-left:10px;" aria-hidden="true" onclick="window.location.href='/cupboard/listcupboard'"></i>
         </div>
         <div class="col-sm-6 col-md-6 col-lg-6">
         <h3 style="text-align:center; padding-top:6px;">Select A Food Category</h3>
         </div>
         <div class="col-sm-3 col-md-3 col-lg-3">
-        <a href="/fridge/editcategory" style="display:inline-block; float:right; padding-right:16px; padding-top:10px;">Edit</a>
+        <a href="/cupboard/editcategory" style="display:inline-block; float:right; padding-right:16px; padding-top:10px;">Edit</a>
         </div>
     </div>
     <div class="card-body">
         <ul id="myUL">
         {{#each foodcategory}}
-        <li><div class="card-text"><a href="/fridge/addfood/{{foodcategory}}"><img src="/img/add2.png"><h5 class="cate">{{foodcategory}}</h5></a></div></li>
+        <li><div class="card-text"><a href="/cupboard/addfood/{{foodcategory}}"><img src="/img/add2.png"><h5 class="cate">{{foodcategory}}</h5></a></div></li>
         {{/each}}
 
         </ul>

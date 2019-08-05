@@ -3,14 +3,14 @@
 <div class="card shadow-sm p-3 mb-5 bg-white rounded" style="margin-top: 30px">
     <div class="row">
         <div class="col-sm-3 col-md-3 col-lg-3">
-            <i class="fa fa-arrow-left fa-2x" style="padding-top: 10px; padding-left:10px;" aria-hidden="true" onclick="window.location.href='/fridge/addcategory'"></i>
+            <i class="fa fa-arrow-left fa-2x" style="padding-top: 10px; padding-left:10px;" aria-hidden="true" onclick="window.location.href='/cupboard/addcategory'"></i>
         </div>
         <div class="col-sm-6 col-md-6 col-lg-6">
         <h3 style="text-align:center; padding-top:6px;">Edit Food
             Category</h3>
         </div>
         <div class="col-sm-3 col-md-3 col-lg-3">
-        <a href="/fridge/addcategory" style="display:inline-block; float:right; padding-right:16px; padding-top:10px;">Done</a>
+        <a href="/cupboard/addcategory" style="display:inline-block; float:right; padding-right:16px; padding-top:10px;">Done</a>
         </div>
     </div>
     <div class="card-body">
@@ -19,8 +19,9 @@
             <li>
                 <img src="/img/add2.png" style="display: inline">
                     <h5 data-editable class="cate" id="{{id}}" style="display: inline">{{foodcategory}}</h5><button 
-                        onclick="window.location.href='/fridge/editcategory/delete/{{id}}'" name="delfood"
+                        onclick="window.location.href='/cupboard/editcategory/delete/{{id}}'" name="delfood"
                         class="btn btn-danger btn-sm" style="float: right; display:inline;"><strong>X</strong></button>
+                
             </li>
             {{/each}}
             <form action="" method="post" id="addcate">
@@ -48,7 +49,7 @@
 
         var $el = $(this);
         var id = $($el).attr('id')
-        var $input = $('<form style="display: inline" action="/fridge/editcategory/update/' + id + '?_method=PUT" method="post" id="' + id + '"><input maxlength="50" id="foodcategory" name="foodcategory" onblur="document.getElementById(\'' + id + '\').submit(); return false;" onfocus=\"this.style.width = ((this.value.length + 2) * 9) + \'px\';\" onkeypress=\"this.style.width = ((this.value.length + 3) * 9) + \'px\';\" /></form>');
+        var $input = $('<form style="display: inline" action="/cupboard/editcategory/update/' + id + '?_method=PUT" method="post" id="' + id + '"><input maxlength="50" id="foodcategory" name="foodcategory" onblur="document.getElementById(\'' + id + '\').submit(); return false;" onfocus=\"this.style.width = ((this.value.length + 2) * 9) + \'px\';\" onkeypress=\"this.style.width = ((this.value.length + 3) * 9) + \'px\';\" /></form>');
         $el.replaceWith($input);
         $('#foodcategory').val($el.text());
         $('#foodcategory').focus();

@@ -43,3 +43,13 @@ img{
     color: black;
     display: block;
 }
+.fa.fa-arrow-left.fa-2x:hover{
+    cursor: pointer;
+}
+#addcatebtn{
+    cursor: pointer;
+}
+body{
+    background-color: #e9ebee;
+  }
+  

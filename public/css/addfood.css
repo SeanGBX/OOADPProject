@@ -34,6 +34,9 @@ button{
     -webkit-appearance: none !important;
 
 }
+.fa.fa-arrow-left.fa-2x:hover{
+    cursor: pointer;
+}
 
 
 

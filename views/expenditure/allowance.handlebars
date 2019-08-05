@@ -1,0 +1,85 @@
+<!--.col-	.col-sm-	.col-md-	.col-lg-	.col-xl- -->
+<div class="container">
+	<div class="card shadow-sm mb-5 bg-white rounded" style="margin-top: 30px">
+    <div class="card-header ">
+    <ul class="nav nav-pills card-header-pills nav-justified">
+      <li class="nav-item">
+        <a class="nav-link" href="/expenditure/listexpenditure">Expenditure</a>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link active" href="">Update Expenditures</a>
+      </li>
+    </ul>
+    <hr>
+		<h3>Allowance</h3>
+		<form action="" method="post" id="addVideo">
+			<div class="form-group">
+				{{!-- Practical 5 Exercise 2: Add a title input text here named 'title'--}}
+			</div>
+			<div class="form-group mb-4">
+				<label class="font-italic" for="story">Current Balance</label>
+				<textarea class="form-control" id="story" name="story" rows="4" disabled ></textarea>
+			</div>
+
+			<div class="form-group">
+
+				<div class="row mb-2">
+					<div class="col-12 col-sm-12 col-md-12 col-lg-6 mb-4">
+	                    <label class="font-italic">New allowance</label><br>
+	                    <textarea class="form-control" id="newItem" name="newAllowance" rows="1"></textarea>
+	                    <br>
+	                    <div class="col-12 col-sm-12 col-md-6 col-lg-6">
+                        	<label class="font-italic">Base on</label>
+                        	<br>
+                        	<div class="form-check form-check-inline">
+                        	<input class="form-check-input" type="radio" name="warningType" id="chinese" value="Percentage">
+                        	<label class="form-check-label" for="chinese">Percentage</label>
+                        	</div>
+                        	<div class="form-check form-check-inline">
+                        	<input class="form-check-input" type="radio" name="warningType" id="english" value="FixAmt">
+                        	<label class="form-check-label" for="englishLang">Fix Amt</label>
+                        	</div>
+                        	</div>
+                        	<br>
+						<label class="font-italic">Set Warning Amount</label>
+                        <textarea class="form-control" id="warnAllowance" name="warningAmt" rows="1"></textarea>
+					</div>
+					<div class="col-12 col-sm-12 col-md-12 col-lg-6">
+						<label class="font-italic"></label>
+
+					</div>
+			<div class="form-group">
+				<div class="row">
+						</div>
+					</div>
+
+
+					<div class="col-12 col-sm-12 col-md-6 col-lg-6">
+						<label class="font-italic">Warning System</label>
+						<br>
+                        <div class="form-check form-check-inline">
+                        	<input class="form-check-input" type="checkbox" id="G" value="SMS" name="warningMethod" checked>
+                        	<label class="form-check-label" for="G">SMS</label>
+                        </div>
+                        <div class="form-check form-check-inline">
+                        	<input class="form-check-input" type="checkbox" id="PG" value="Email" name="warningMethod">
+                        	<label class="form-check-label" for="PG">E-mail</label>
+                        </div>
+					</div>
+				</div>
+
+			</div>
+			<br>
+			<button id="butAddVideo" type="submit" class="btn btn-primary">Save
+			</button>
+		</form>
+	</div>
+</div>
+
+<script>
+		$('#datepicker').datepicker({
+			format: 'dd/mm/yyyy',
+			value: new Date().toLocaleDateString('en-AUS'),
+			uiLibrary: 'bootstrap4',
+		});
+</script>

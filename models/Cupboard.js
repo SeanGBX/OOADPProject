@@ -1,6 +1,6 @@
 const Sequelize = require('sequelize');
 const db = require('../config/DBConfig');
-const Fridge = db.define('fridge', {
+const Cupboard = db.define('cupboard', {
     fooditem: {
         type: Sequelize.STRING
     },
@@ -12,12 +12,6 @@ const Fridge = db.define('fridge', {
     },
     quantity: {
         type: Sequelize.DECIMAL
-    },
-    maxQuantity:{
-        type: Sequelize.DECIMAL
-    },
-    minQuantity:{
-        type: Sequelize.DECIMAL
     }
 });
-module.exports = Fridge;
+module.exports = Cupboard;

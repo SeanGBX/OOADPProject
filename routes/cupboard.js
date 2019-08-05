@@ -1,17 +1,17 @@
 const express = require('express');
 const router = express.Router();
-const Fridge = require('../models/Fridge');
+const Cupboard = require('../models/Cupboard');
 const FoodDatabase = require('../models/FoodDatabase');
 const FoodCategory = require('../models/FoodCategory');
 const alertMessage = require('../helpers/messenger'); // Bring in alert messenger
 const ensureAuthenticated = require('../helpers/auth');
-const moment = require('moment');
 var sequelize = require("sequelize");
+const moment = require('moment');
 const Op = sequelize.Op;
 
-router.get('/listfridge', ensureAuthenticated, (req, res) => {
-    const title = 'Fridge';
-    Fridge.findAll({
+router.get('/listcupboard', ensureAuthenticated,(req, res) =>{
+	const title = 'Cupboard';
+    Cupboard.findAll({
         where: {
             userId: req.user.id
             },
@@ -19,8 +19,8 @@ router.get('/listfridge', ensureAuthenticated, (req, res) => {
             ['expirydate', 'ASC']
         ],
         raw: true
-    }).then((fridges) => {
-        Fridge.findAll({
+    }).then((cupboards) => {
+        Cupboard.findAll({
             where: {
                 userId: req.user.id
             },
@@ -32,8 +32,8 @@ router.get('/listfridge', ensureAuthenticated, (req, res) => {
             
         })
         .then((categories) => {
-            res.render('fridge/listfridge', {
-                fridges: fridges,
+            res.render('cupboard/listcupboard', {
+                cupboards: cupboards,
                 categories:categories,
                 title: title,
             })
@@ -41,13 +41,13 @@ router.get('/listfridge', ensureAuthenticated, (req, res) => {
     })  .catch(err => console.log(err));
 });
 
-router.get('/listfridge/search', ensureAuthenticated, (req, res) => {
+router.get('/listcupboard/search', ensureAuthenticated, (req, res) => {
     let { term } = req.query;
 
     // Make lowercase
     term = term.toLowerCase();
     if (term == ""){
-        Fridge.findAll({
+        Cupboard.findAll({
             where: {
                 userId: req.user.id
                 },
@@ -55,8 +55,8 @@ router.get('/listfridge/search', ensureAuthenticated, (req, res) => {
                 ['expirydate', 'ASC']
             ],
             raw: true
-        }).then((fridges) => {
-            Fridge.findAll({
+        }).then((cupboards) => {
+            Cupboard.findAll({
                 where: {
                     userId: req.user.id
                 },
@@ -68,15 +68,15 @@ router.get('/listfridge/search', ensureAuthenticated, (req, res) => {
                 
             })
             .then((categories) => {
-                res.render('fridge/listfridge', {
-                    fridges: fridges,
+                res.render('cupboard/listcupboard', {
+                    cupboards: cupboards,
                     categories:categories,
                 })
             })
         })  .catch(err => console.log(err));
     }
     else{
-    Fridge.findAll({
+    Cupboard.findAll({
         where: {
             userId: req.user.id,
             fooditem: {
@@ -86,8 +86,8 @@ router.get('/listfridge/search', ensureAuthenticated, (req, res) => {
                 ['expirydate', 'ASC']
             ],
             raw: true
-        }).then((fridges) => {
-            Fridge.findAll({
+        }).then((cupboards) => {
+            Cupboard.findAll({
                 where: {
                     userId: req.user.id,
                     fooditem: {
@@ -102,8 +102,8 @@ router.get('/listfridge/search', ensureAuthenticated, (req, res) => {
 
             })
                 .then((categories) => {
-                    res.render('fridge/listfridge', {
-                        fridges: fridges,
+                    res.render('cupboard/listcupboard', {
+                        cupboards: cupboards,
                         categories: categories,
                     })
                 })
@@ -111,11 +111,11 @@ router.get('/listfridge/search', ensureAuthenticated, (req, res) => {
     }
 });
 
-router.get('/listfridge/sort', ensureAuthenticated, (req, res) => {
+router.get('/listcupboard/sort', ensureAuthenticated, (req, res) => {
     let { term } = req.query;
 
     if (term == "exp"){
-        Fridge.findAll({
+        Cupboard.findAll({
             where: {
                 userId: req.user.id
                 },
@@ -123,8 +123,8 @@ router.get('/listfridge/sort', ensureAuthenticated, (req, res) => {
                 ['expirydate', 'ASC']
             ],
             raw: true
-        }).then((fridges) => {
-            Fridge.findAll({
+        }).then((cupboards) => {
+            Cupboard.findAll({
                 where: {
                     userId: req.user.id
                 },
@@ -136,15 +136,15 @@ router.get('/listfridge/sort', ensureAuthenticated, (req, res) => {
                 
             })
             .then((categories) => {
-                res.render('fridge/listfridge', {
-                    fridges: fridges,
+                res.render('cupboard/listcupboard', {
+                    cupboards: cupboards,
                     categories:categories,
                 })
             })
         })  .catch(err => console.log(err));
     }
     else if(term == "asc"){
-        Fridge.findAll({
+        Cupboard.findAll({
             where: {
                 userId: req.user.id
                 },
@@ -152,8 +152,8 @@ router.get('/listfridge/sort', ensureAuthenticated, (req, res) => {
                 ['fooditem', 'ASC']
             ],
             raw: true
-        }).then((fridges) => {
-            Fridge.findAll({
+        }).then((cupboards) => {
+            Cupboard.findAll({
                 where: {
                     userId: req.user.id
                 },
@@ -165,15 +165,15 @@ router.get('/listfridge/sort', ensureAuthenticated, (req, res) => {
                 
             })
             .then((categories) => {
-                res.render('fridge/listfridge', {
-                    fridges: fridges,
+                res.render('cupboard/listcupboard', {
+                    cupboards: cupboards,
                     categories:categories,
                 })
             })
         })  .catch(err => console.log(err));
     }
     else if(term == "desc"){
-        Fridge.findAll({
+        Cupboard.findAll({
             where: {
                 userId: req.user.id
                 },
@@ -181,8 +181,8 @@ router.get('/listfridge/sort', ensureAuthenticated, (req, res) => {
                 ['fooditem', 'DESC']
             ],
             raw: true
-        }).then((fridges) => {
-            Fridge.findAll({
+        }).then((cupboards) => {
+            Cupboard.findAll({
                 where: {
                     userId: req.user.id
                 },
@@ -194,8 +194,8 @@ router.get('/listfridge/sort', ensureAuthenticated, (req, res) => {
                 
             })
             .then((categories) => {
-                res.render('fridge/listfridge', {
-                    fridges: fridges,
+                res.render('cupboard/listcupboard', {
+                    cupboards: cupboards,
                     categories:categories,
                 })
             })
@@ -203,9 +203,9 @@ router.get('/listfridge/sort', ensureAuthenticated, (req, res) => {
     }
 });
 
-router.get('/editfridge', ensureAuthenticated, (req, res) => {
-    const title = 'Fridge';
-    Fridge.findAll({
+router.get('/editcupboard', ensureAuthenticated, (req, res) => {
+    const title = 'Cupboard';
+    Cupboard.findAll({
         where: {
             userId: req.user.id
             },
@@ -213,8 +213,8 @@ router.get('/editfridge', ensureAuthenticated, (req, res) => {
             ['expirydate', 'ASC']
         ],
         raw: true
-    }).then((fridges) => {
-        Fridge.findAll({
+    }).then((cupboards) => {
+        Cupboard.findAll({
             where: {
                 userId: req.user.id
             },
@@ -226,8 +226,8 @@ router.get('/editfridge', ensureAuthenticated, (req, res) => {
             
         })
         .then((categories) => {
-            res.render('fridge/editfridge', {
-                fridges: fridges,
+            res.render('cupboard/editcupboard', {
+                cupboards: cupboards,
                 categories:categories,
                 title: title,
             })
@@ -235,13 +235,13 @@ router.get('/editfridge', ensureAuthenticated, (req, res) => {
     })  .catch(err => console.log(err));
 });
 
-router.get('/editfridge/search', ensureAuthenticated, (req, res) => {
+router.get('/editcupboard/search', ensureAuthenticated, (req, res) => {
     let { term } = req.query;
 
     // Make lowercase
     term = term.toLowerCase();
     if (term == ""){
-        Fridge.findAll({
+        Cupboard.findAll({
             where: {
                 userId: req.user.id
                 },
@@ -249,8 +249,8 @@ router.get('/editfridge/search', ensureAuthenticated, (req, res) => {
                 ['expirydate', 'ASC']
             ],
             raw: true
-        }).then((fridges) => {
-            Fridge.findAll({
+        }).then((cupboards) => {
+            Cupboard.findAll({
                 where: {
                     userId: req.user.id
                 },
@@ -262,15 +262,15 @@ router.get('/editfridge/search', ensureAuthenticated, (req, res) => {
                 
             })
             .then((categories) => {
-                res.render('fridge/editfridge', {
-                    fridges: fridges,
+                res.render('cupboard/editcupboard', {
+                    cupboards: cupboards,
                     categories:categories,
                 })
             })
         })  .catch(err => console.log(err));
     }
     else{
-    Fridge.findAll({
+    Cupboard.findAll({
         where: {
             userId: req.user.id,
             fooditem: {
@@ -280,8 +280,8 @@ router.get('/editfridge/search', ensureAuthenticated, (req, res) => {
                 ['expirydate', 'ASC']
             ],
             raw: true
-        }).then((fridges) => {
-            Fridge.findAll({
+        }).then((cupboards) => {
+            Cupboard.findAll({
                 where: {
                     userId: req.user.id,
                     fooditem: {
@@ -296,8 +296,8 @@ router.get('/editfridge/search', ensureAuthenticated, (req, res) => {
 
             })
                 .then((categories) => {
-                    res.render('fridge/editfridge', {
-                        fridges: fridges,
+                    res.render('cupboard/editcupboard', {
+                        cupboards: cupboards,
                         categories: categories,
                     })
                 })
@@ -305,11 +305,11 @@ router.get('/editfridge/search', ensureAuthenticated, (req, res) => {
     }
 });
 
-router.get('/editfridge/sort', (req, res) => {
+router.get('/editcupboard/sort', (req, res) => {
     let { term } = req.query;
 
     if (term == "exp"){
-        Fridge.findAll({
+        Cupboard.findAll({
             where: {
                 userId: req.user.id
                 },
@@ -317,8 +317,8 @@ router.get('/editfridge/sort', (req, res) => {
                 ['expirydate', 'ASC']
             ],
             raw: true
-        }).then((fridges) => {
-            Fridge.findAll({
+        }).then((cupboards) => {
+            Cupboard.findAll({
                 where: {
                     userId: req.user.id
                 },
@@ -330,15 +330,15 @@ router.get('/editfridge/sort', (req, res) => {
                 
             })
             .then((categories) => {
-                res.render('fridge/editfridge', {
-                    fridges: fridges,
+                res.render('cupboard/editcupboard', {
+                    cupboards: cupboards,
                     categories:categories,
                 })
             })
         })  .catch(err => console.log(err));
     }
     else if(term == "asc"){
-        Fridge.findAll({
+        Cupboard.findAll({
             where: {
                 userId: req.user.id
                 },
@@ -346,8 +346,8 @@ router.get('/editfridge/sort', (req, res) => {
                 ['fooditem', 'ASC']
             ],
             raw: true
-        }).then((fridges) => {
-            Fridge.findAll({
+        }).then((cupboards) => {
+            Cupboard.findAll({
                 where: {
                     userId: req.user.id
                 },
@@ -359,15 +359,15 @@ router.get('/editfridge/sort', (req, res) => {
                 
             })
             .then((categories) => {
-                res.render('fridge/editfridge', {
-                    fridges: fridges,
+                res.render('cupboard/editcupboard', {
+                    cupboards: cupboards,
                     categories:categories,
                 })
             })
         })  .catch(err => console.log(err));
     }
     else if(term == "desc"){
-        Fridge.findAll({
+        Cupboard.findAll({
             where: {
                 userId: req.user.id
                 },
@@ -375,8 +375,8 @@ router.get('/editfridge/sort', (req, res) => {
                 ['fooditem', 'DESC']
             ],
             raw: true
-        }).then((fridges) => {
-            Fridge.findAll({
+        }).then((cupboards) => {
+            Cupboard.findAll({
                 where: {
                     userId: req.user.id
                 },
@@ -388,8 +388,8 @@ router.get('/editfridge/sort', (req, res) => {
                 
             })
             .then((categories) => {
-                res.render('fridge/editfridge', {
-                    fridges: fridges,
+                res.render('cupboard/editcupboard', {
+                    cupboards: cupboards,
                     categories:categories,
                 })
             })
@@ -397,21 +397,21 @@ router.get('/editfridge/sort', (req, res) => {
     }
 });
 
-router.get('/editfridge/delete/:id', ensureAuthenticated, (req, res) => {
+router.get('/editcupboard/delete/:id', ensureAuthenticated, (req, res) => {
     let id = req.params.id;
-    Fridge.findOne({
+    Cupboard.findOne({
         where: {
             id: id,
         }
-        }).then((fridges) =>{
-            if(fridges != null){
-                Fridge.destroy({
+        }).then((cupboards) =>{
+            if(cupboards != null){
+                Cupboard.destroy({
                     where: {
                         id: id
                 }
-                }).then((fridges) =>{
+                }).then((cupboards) =>{
                     alertMessage(res, 'success', 'Food entry successfully deleted', 'far fa-trash-alt', true);
-                    res.redirect('/fridge/editfridge');
+                    res.redirect('/cupboard/editcupboard'); 
                 }).catch(err => console.log(err));
             }
             else{
@@ -423,12 +423,12 @@ router.get('/editfridge/delete/:id', ensureAuthenticated, (req, res) => {
     }).catch(err => console.log(err));
 });
 
-router.put('/editfridge/update/:id', ensureAuthenticated, (req, res) => {
+router.put('/editcupboard/update/:id', ensureAuthenticated, (req, res) => {
     let fooditem = req.body.fooditem
     if (fooditem == ""){{
         fooditem = "Null";
     }}
-    Fridge.update({
+    Cupboard.update({
         fooditem
 	}, {
 		where: {
@@ -436,13 +436,13 @@ router.put('/editfridge/update/:id', ensureAuthenticated, (req, res) => {
 		}
 	}).then(() => {
         alertMessage(res, 'success','Entry successfully changed to ' + fooditem , 'fa fa-plus', true);
-		res.redirect('/fridge/editfridge'); 
+		res.redirect('/cupboard/editcupboard'); 
 
 	}).catch(err => console.log(err));
 });
 
 router.get('/addfood/:category', ensureAuthenticated, (req, res) => {
-    const title = 'Fridge';
+    const title = 'Cupboard';
     let category = req.params.category;
     FoodDatabase.findAll({
         order: [
@@ -452,7 +452,7 @@ router.get('/addfood/:category', ensureAuthenticated, (req, res) => {
     })
         .then((fooddatabase) => {
             // pass object to listVideos.handlebar
-            res.render('fridge/addfood', {
+            res.render('cupboard/addfood', {
                 fooddatabase: fooddatabase,
                 title: title,
                 category:category
@@ -470,18 +470,19 @@ router.post('/addfood/:category', ensureAuthenticated, (req, res) =>{
     if (quantity == ""){
         quantity = 1
     }
-    Fridge.create({
+    Cupboard.create({
         fooditem,
         expirydate,
         quantity,
         category,
         userId
-    }).then((fridges) => {
+    }).then((cupboards) => {
         alertMessage(res, 'success', fooditem + ' entry successfully added to ' + category, 'fa fa-plus', true);
-        res.redirect('/fridge/listfridge');
+        res.redirect('/cupboard/listcupboard');
     })
         .catch(err => console.log(err))
 })
+
 
 router.post('/addfood', ensureAuthenticated, (req, res) =>{
     let fooditem = req.body.fooditem;
@@ -490,14 +491,13 @@ router.post('/addfood', ensureAuthenticated, (req, res) =>{
     },
     ).then(() => {
         alertMessage(res, 'success', ' Entry successfully added ', 'fa fa-plus', true);
-        res.redirect('/fridge/addcategory' );
+        res.redirect('/cupboard/addcategory' );
     })
         .catch(err => console.log(err))
 })
 
-
 router.get('/addcategory', ensureAuthenticated, (req, res) => {
-    const title = 'Fridge';
+    const title = 'cupboard';
     FoodCategory.findAll({
         where:{
             userId: req.user.id
@@ -509,28 +509,7 @@ router.get('/addcategory', ensureAuthenticated, (req, res) => {
     })
         .then((foodcategory) => {
             // pass object to listVideos.handlebar
-            res.render('fridge/addcategory', {
-                foodcategory: foodcategory,
-                title: title
-            });
-        })
-        .catch(err => console.log(err));
-});
-
-router.get('/editcategory', ensureAuthenticated, (req, res) => {
-    const title = 'Fridge';
-    FoodCategory.findAll({
-        where:{
-            userId: req.user.id
-        },
-        order: [
-            ['foodcategory', 'ASC']
-        ],
-        raw: true
-    })
-        .then((foodcategory) => {
-            // pass object to listVideos.handlebar
-            res.render('fridge/editcategory', {
+            res.render('cupboard/addcategory', {
                 foodcategory: foodcategory,
                 title: title
             });
@@ -551,9 +530,31 @@ router.put('/editcategory/update/:id', ensureAuthenticated, (req, res) => {
 		}
 	}).then(() => {
         alertMessage(res, 'success','Entry successfully changed to ' + foodcategory , 'fa fa-plus', true);
-		res.redirect('/fridge/editcategory'); 
+		res.redirect('/cupboard/editcategory'); 
 
 	}).catch(err => console.log(err));
+});
+
+
+router.get('/editcategory', ensureAuthenticated, (req, res) => {
+    const title = 'Cupboard';
+    FoodCategory.findAll({
+        where:{
+            userId: req.user.id
+        },
+        order: [
+            ['foodcategory', 'ASC']
+        ],
+        raw: true
+    })
+        .then((foodcategory) => {
+            // pass object to listVideos.handlebar
+            res.render('cupboard/editcategory', {
+                foodcategory: foodcategory,
+                title: title
+            });
+        })
+        .catch(err => console.log(err));
 });
 
 router.post('/editcategory', ensureAuthenticated, (req, res) =>{
@@ -562,11 +563,12 @@ router.post('/editcategory', ensureAuthenticated, (req, res) =>{
     FoodCategory.create({
         foodcategory,
         userId
-    }).then((fridges) => {
-        res.redirect('/fridge/editcategory');
+    }).then((cupboards) => {
+        res.redirect('/cupboard/editcategory');
     })
         .catch(err => console.log(err))
 })
+
 
 router.get('/editcategory/delete/:id', ensureAuthenticated, (req, res) => {
     let id = req.params.id;
@@ -574,15 +576,15 @@ router.get('/editcategory/delete/:id', ensureAuthenticated, (req, res) => {
         where: {
             id: id,
         }
-        }).then((fridge) =>{
-            if(fridge != null){
+        }).then((cupboards) =>{
+            if(cupboards != null){
                 FoodCategory.destroy({
                     where: {
                         id: id
                 }
-                }).then((fridge) =>{
+                }).then((cupboards) =>{
                     alertMessage(res, 'success', 'Food entry successfully deleted', 'far fa-trash-alt', true);
-                    res.redirect('/fridge/editcategory');
+                    res.redirect('/cupboard/editcategory');
                 }).catch(err => console.log(err));
             }
             else{
@@ -593,5 +595,5 @@ router.get('/editcategory/delete/:id', ensureAuthenticated, (req, res) => {
             
     }).catch(err => console.log(err));
 });
-module.exports = router;
 
+module.exports = router;

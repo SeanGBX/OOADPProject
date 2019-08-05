@@ -4,7 +4,7 @@
     <div class="row">
         <div class="col-sm-3 col-md-3 col-lg-3">
             <i class="fa fa-arrow-left fa-2x" style="padding-top: 10px; padding-left:10px;" aria-hidden="true"
-                onclick="window.location.href='/fridge/listfridge'"></i>
+                onclick="window.location.href='/cupboard/addcategory'"></i>
         </div>
         <div class="col-sm-6 col-md-6 col-lg-6">
             <h3 style="text-align:center; padding-top:6px;">Choose your food item</h3>
@@ -16,8 +16,10 @@
         <input
             style="background-image: url(/img/searchicon.png);background-position: 10px 12px;background-repeat: no-repeat;height:100%;width: 100%;font-size: 16px;padding: 12px 20px 12px 40px;border: 1px solid #ddd;margin-bottom: 12px;"
             type="text" id="myInput" onkeyup="searchFood()" placeholder="Search for food..">
+
         <ul id="myUL" style="list-style-type: none;">
-            <li><button data-toggle="modal" data-target="#myModal"><img src="/img/add2.png"
+            <li><button  data-toggle="modal" data-target="#myModal"><img
+                        src="/img/add2.png"
                         style="width: 28px;margin-right: 8px; display:inline-block; margin-bottom:4px; !important">Add
                     Your Own Item</button></li>
             <!-- Modal -->
@@ -26,17 +28,17 @@
                     <!-- Modal content-->
                     <div class="modal-content">
                         <div class="modal-header">
-                            <h4 style="padding-left:0px;" class="modal-title ">Add a food item</h4>
+                            <h4 style="padding-left:0px;"class="modal-title ">Add a food item</h4>
                         </div>
                         <div class="modal-body">
-                            <form action="/fridge/addfood" method="post" style="display: block;">
-                                <div class="form-group">
-                                    <label>Food Item</label>
-                                    <input type="name" name="fooditem" id="fooditem" tabindex="1" class="form-control"
-                                        placeholder="Food Name" required>
-                                </div>
-                                <button type="submit" class="btn btn-primary">Submit</button>
-                            </form>
+                            <form action="/cupboard/addfood" method="post" style="display: block;">
+							<div class="form-group">
+                                <label >Food Item</label>
+								<input type="name" name="fooditem" id="fooditem" tabindex="1" class="form-control"
+									placeholder="Food Name" required>
+							</div>
+							<button type="submit" class="btn btn-primary">Submit</button>
+						</form>
                         </div>
                         <div class="modal-footer">
                             <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
@@ -46,7 +48,7 @@
 
                 </div>
             </div>
-
+            
             {{#each fooddatabase}}
             <li><button data-toggle="modal" data-target="#myModal2" id="modalbtn"
                     value="{{fooditem}}">{{fooditem}}</button></li>
@@ -86,6 +88,7 @@
                 </div>
             </div>
         </ul>
+        </form>
     </div>
 </div>
 
@@ -111,11 +114,11 @@
         }
     }
     $('#datepicker').datepicker({
-        value: new Date().toLocaleDateString('en-GB'),
-        format: 'dd/mm/yyyy',
-        uiLibrary: 'bootstrap4',
-    });
-    $('body').on('click', '#modalbtn', function () {
+		value: new Date().toLocaleDateString('en-GB'),
+		format: 'dd/mm/yyyy',
+		uiLibrary: 'bootstrap4',
+	});
+    $('body').on('click', '#modalbtn', function(){
         var elem = this.value;
         $('#food').val(elem);
         $('#modaltitle').text(elem)

@@ -8,10 +8,10 @@
     <div class="card-header ">
     <ul class="nav nav-pills card-header-pills nav-justified">
       <li class="nav-item">
-        <a class="nav-link active" href="">Your Fridge</a>
+        <a class="nav-link" href="/fridge/listfridge">Your Fridge</a>
       </li>
       <li class="nav-item">
-        <a class="nav-link" href="/cupboard/listcupboard">Your Cupboards</a>
+        <a class="nav-link active" href="">Your Cupboards</a>
       </li>
       <li class="nav-item">
         <a class="nav-link" href="/expiration">Expired Items</a>
@@ -22,10 +22,10 @@
         <div class="col-sm-3 col-md-3 col-lg-3">
         </div>
         <div class="col-sm-6 col-md-6 col-lg-6">
-            <h3 style="text-align:center; padding-top:6px;">Your Fridge</h3>
+            <h3 style="text-align:center; padding-top:6px;">Your Cupboard</h3>
         </div>
         <div class="col-sm-3 col-md-3 col-lg-3">
-            <a href="/fridge/editfridge" style="display:inline-block; float:right; padding-right:16px; padding-top:10px;">Edit</a>
+            <a href="/cupboard/editcupboard" style="display:inline-block; float:right; padding-right:16px; padding-top:10px;">Edit</a>
         </div>
         </div>
     </div>
@@ -33,7 +33,7 @@
            
     <div class="row">
         <div class="col-sm-10 col-md-10 col-lg-11 ">
-            <form action="/fridge/listfridge/search" class="search-form" id="search-form">
+            <form action="/cupboard/listcupboard/search" class="search-form" id="search-form">
                 <div class="input-group md-form form-sm form-1 pl-0" style="padding-bottom:20px;">
                     <div class="input-group-prepend">
                         <span class="input-group-text" id="basic-text1"
@@ -52,9 +52,9 @@
 
                 </button>
                 <div class="dropdown-menu dropdown-menu-right" aria-labelledby="dropdownMenuButton">
-                    <a class="dropdown-item" href="/fridge/listfridge">Expiry Date (Latest)</a>
-                    <a class="dropdown-item" href="/fridge/listfridge/sort?term=asc">Ascending</a>
-                    <a class="dropdown-item" href="/fridge/listfridge/sort?term=desc">Descending</a>
+                    <a class="dropdown-item" href="/cupboard/listcupboard">Expiry Date (Latest)</a>
+                    <a class="dropdown-item" href="/cupboard/listcupboard/sort?term=asc">Ascending</a>
+                    <a class="dropdown-item" href="/cupboard/listcupboard/sort?term=desc">Descending</a>
                 </div>
         </div>
     </div>
@@ -64,14 +64,13 @@
 
 
         <li>
-            <div class="card-text"><a href="/fridge/addcategory"><img src="/img/add2.png"
+            <div class="card-text"><a href="/cupboard/addcategory"><img src="/img/add2.png"
                         style="width: 28px;margin-right: 8px; display:inline-block; margin-bottom:4px; !important">
                     <h5 style="display:inline-block; font-weight:normal;">Add Category</h5>
                 </a>
             </div>
         </li>
     </ul>
-
     {{#categories}}
     <div class="accordion" id="foodAccordion{{DISTINCT}}" style="padding-bottom:10px;">
         <button class="btn btn-link collapsed" type="button" data-toggle="collapse" data-target="#food{{DISTINCT}}"
@@ -86,7 +85,7 @@
                         <div class="card-text"><a href="/fridge/addfood/{{DISTINCT}}" style="color: blue;"><img
                                     src="/img/add.png" style="width: 22px;margin-right: 8px; margin-bottom:4px;">Add
                                 Food to {{DISTINCT}}</a></div>
-                        {{#each ../fridges}}
+                        {{#each ../cupboards}}
                         {{{checkcategory ../DISTINCT category fooditem expirydate quantity}}}
                         {{/each}}
             </div>

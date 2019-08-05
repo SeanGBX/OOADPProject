@@ -1,0 +1,99 @@
+
+<style>
+#myUL {
+    list-style-type: none;
+    padding: 0;
+    margin: 0;
+}
+
+#myUL li a {
+    border-bottom: 1px solid #ddd;
+    margin-top: -1px;
+    padding: 12px;
+    text-decoration: none;
+    font-size: 18px;
+    color: black;
+    display: block;
+	margin-left:10px;
+}
+
+#myUL li a:hover:not(.header) {
+    background-color: #eee;
+}
+h3{
+	padding-left:10px;
+}
+</style>
+<div class="card shadow-sm mb-5 bg-white rounded" style="margin-top: 30px">
+<div class="card-header">
+    <ul class="nav nav-pills card-header-pills nav-justified">
+      <li class="nav-item">
+        <a class="nav-link" href="/fridge/listfridge">Your Fridge</a>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link " href="/cupboard/listcupboard">Your Cupboards</a>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link active" href="">Expired Items</a>
+      </li>
+    </ul>
+    <hr>
+       <div class="row">
+        <div class="col-sm-3 col-md-3 col-lg-3">
+        </div>
+        <div class="col-sm-6 col-md-6 col-lg-6">
+            <h3 style="text-align:center; padding-top:6px;">Expired Items</h3>
+        </div>
+        <div class="col-sm-3 col-md-3 col-lg-3">
+        </div>
+        </div>
+    </div>
+	<div class="p-3">
+		<ul id="myUL" style="list-style-type: none;">
+			<h3 id = "heading1">Expired in fridge</h3>
+            {{#each fridges}}
+               {{{expiryformat category fooditem expirydate id "fridge" quantity}}}
+            {{/each}}
+        </ul>
+		<br>
+		<ul id="myUL" style="list-style-type: none;">
+			<h3 id = "heading1">Expired in cupboard</h3>
+            {{#each cupboard}}
+               {{{expiryformat category fooditem expirydate id "cupboard" quantity}}}
+            {{/each}}
+        </ul>
+<br>
+</div>
+</div>
+
+<script>
+const nodemailer = require('nodemailer');
+var transporter = nodemailer.createTransport({
+		service: 'gmail',
+		auth: {
+			user: 'ziyi527@gmail.com',
+			pass: 'a31180127'
+		}
+	});
+	var mailOptions = {
+		from: 'ziyi527@gmail.com',
+		to: '760128226@qq.com',
+		subject: 'Expiring',
+		text: 'Something is expiring! Please check!!!'
+	};
+	var date = new Date();
+	var current_hour = date.getHours();
+	var time = parseInt(current_hour);
+	console.log(current_hour);
+	console.log(time);
+	if ( time === 18 ){
+		transporter.sendMail(mailOptions, function(error, info){
+			if (error) {
+				console.log(error);
+			} else {
+				console.log('Email sent: ' + info.response);
+			}
+		});
+	}
+</script>
+

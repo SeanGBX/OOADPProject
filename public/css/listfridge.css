@@ -1,3 +1,6 @@
+body{
+    font-family: -apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,"Helvetica Neue",Arial,sans-serif,"Apple Color Emoji","Segoe UI Emoji","Segoe UI Symbol","Noto Color Emoji" !important;
+}
 #myUL {
     list-style-type: none;
     padding: 0;
@@ -100,3 +103,9 @@ a#button {
 #basic-text1:hover{
     cursor: pointer;
 }
+.fa.fa-arrow-left.fa-2x:hover{
+    cursor: pointer;
+}
+body{
+    background-color: #e9ebee;
+  }

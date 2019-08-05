@@ -16,10 +16,11 @@
                 <br>
                 <h3>Quantity:{{quantity}}</h3>
                 <br>
-                <a href = "/reminder/delete/{{id}}" class = "card-link">
-                    <i class ="far fa-trash-alt"></i>
-                    Delete
-                </a>
+                <a href="/reminder/delete/{{id}}" class="card-link" data-toggle="confirmation"
+                            data-title="Confirm delete?">
+                            <i class="far fa-trash-alt"></i>
+                            Delete
+                        </a>
                 <hr style="height:1px; border:0px; color:#000; background-color:#000;">
                 {{/each}}
                 {{else}}
@@ -32,4 +33,5 @@
     </div>
 
 </div>
+
 

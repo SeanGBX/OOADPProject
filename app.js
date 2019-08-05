@@ -30,12 +30,18 @@ authenticate.localStrategy(passport);
 const mainRoute = require('./routes/main');
 const userRoute = require('./routes/user'); 
 const fridgeRoute = require('./routes/fridge');
-const shopRoute = require('./routes/shop')
-const reminderRoute = require('./routes/reminder')
+const cupboardRoute = require('./routes/cupboard')
+const shopRoute = require('./routes/shop');
+const expenditureRoute = require('./routes/expenditure');
+const reminderRoute = require('./routes/reminder');
+
 
 
 const {editcheckcategory} = require('./helpers/editcheckcategory');
-const {checkcategory} = require('./helpers/checkcategory')
+const {cupeditcheckcategory} = require('./helpers/editcheckcategory');
+const {checkcategory} = require('./helpers/checkcategory');
+const {expiryformat} = require('./helpers/expiryformat');
+
 /*
 * Creates an Express server - Express is a web application framework for creating web applications
 * in Node JS.
@@ -58,8 +64,10 @@ const db = require('./config/db'); //db.js config file
 app.engine('handlebars', exphbs({
 	helpers: {
 		editcheckcategory:editcheckcategory,
+		cupeditcheckcategory:cupeditcheckcategory,
 		checkcategory:checkcategory,
-		radioCheck: radioCheck
+		radioCheck: radioCheck,
+		expiryformat: expiryformat
 	},
 	defaultLayout: 'main' // Specify default template views/layout/main.handlebar 
 }));
@@ -124,8 +132,10 @@ app.use(function(req, res, next){
 app.use('/', mainRoute); // mainRoute is declared to point to routes/main.js
 app.use('/user', userRoute);
 app.use('/fridge', fridgeRoute);
+app.use('/cupboard', cupboardRoute)
 app.use('/shop', shopRoute);
 app.use('/reminder', reminderRoute)
+app.use('/expenditure', expenditureRoute)
 // This route maps the root URL to any path defined in main.js
 
 /*
