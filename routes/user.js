@@ -64,7 +64,7 @@ router.post('/register', (req, res) => {
                     bcrypt.genSalt(10, function (err, salt) {
                         bcrypt.hash(password, salt, function (err, hash) {
                             password = bcrypt.hashSync(password, salt)
-                            User.create({ username, email, password })
+                            User.create({ username, email, password ,classification})
                                 .then(user => {
                                     alertMessage(res, 'success', user.username + ' added.Please login ', 'fas fa - sign - in -alt ', true);
                                     res.redirect('/user/login');
