@@ -33,6 +33,9 @@ router.get('/newreminder', (req, res) => {
 	})
 		.then((fooditem) => {
 			FoodCategory.findAll({
+				where: {
+					userId: req.user.id
+					},
 				order: [
 					['foodcategory', 'ASC']
 				],
@@ -104,6 +107,9 @@ router.get('/edit/:id', (req, res) => {
 			raw: true
 		}).then((fooddatabases) => {
 				FoodCategory.findAll({
+					where: {
+						userId: req.user.id
+						},
 					order: [
 						['foodcategory', 'ASC']
 					],

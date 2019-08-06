@@ -21,5 +21,15 @@ module.exports = {
             return "checked";
         }
         return '';
-    },
+	},
+	
+	isadmin:function(classification) {
+		if (classification == "admin"){
+			return '<li class="nav-item"><a href="/shop/adminShop" class="nav-link">Admin Shop</a></li>'
+		}
+		else {
+			return
+		}
+
+	}
 };

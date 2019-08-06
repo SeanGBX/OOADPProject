@@ -41,6 +41,8 @@ const {editcheckcategory} = require('./helpers/editcheckcategory');
 const {cupeditcheckcategory} = require('./helpers/editcheckcategory');
 const {checkcategory} = require('./helpers/checkcategory');
 const {expiryformat} = require('./helpers/expiryformat');
+const {timeformat} = require('./helpers/timeformat');
+const {isadmin} = require('./helpers/hbs');
 
 /*
 * Creates an Express server - Express is a web application framework for creating web applications
@@ -67,7 +69,9 @@ app.engine('handlebars', exphbs({
 		cupeditcheckcategory:cupeditcheckcategory,
 		checkcategory:checkcategory,
 		radioCheck: radioCheck,
-		expiryformat: expiryformat
+		expiryformat: expiryformat,
+		timeformat:timeformat,
+		isadmin,isadmin
 	},
 	defaultLayout: 'main' // Specify default template views/layout/main.handlebar 
 }));
