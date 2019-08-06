@@ -14,6 +14,10 @@
 
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
     <style>
+        body {
+            background-color: #e9ebee;
+        }
+
         .parent {
             position: relative;
             top: 0;
@@ -89,28 +93,17 @@
             box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2);
             /* this adds the "card" effect */
             text-align: center;
-            background-color: #f1f1f1;
         }
     </style>
 
-     <!-- bootstrap theme -->
-    <script type="text/javascript"
-        src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.4.1/jquery.slim.min.js"></script>
-    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
-    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.bundle.min.js">
 
     <!-- getbootstrap -->
     <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"
         integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo"
         crossorigin="anonymous"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.3/umd/popper.min.js"
-        integrity="sha384-ZMP7rVo3mIykV+2+9J3UJ46jBk0WLaUAdn689aCwoqbBJiSnjAK/l8WvCWPIPm49"
-        crossorigin="anonymous"></script>
-    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/js/bootstrap.min.js"
-        integrity="sha384-ChfqqxuZUCnJSK3+MXmPNIyE6ZbWh2IMqE241rYiqJxyMiZ6OW/JmZQ5stwEULTy"
-        crossorigin="anonymous"></script>
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css"
         integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO" crossorigin="anonymous">
+    <link rel="stylesheet" href="/css/shop.css">
 
     <!-- Iconic -->
     {{!-- <link href="/open-iconic/font/css/open-iconic-bootstrap.css" rel="stylesheet"> --}}
@@ -119,7 +112,7 @@
 
 
     <!-- Heading title -->
-
+<div class="card shadow-sm mb-5 bg-white rounded" style="margin-top: 30px">
     <!-- Full Page Image Header with Vertically Centered Content -->
         <div class="container">
             <div class="py-5 row align-items-center">
@@ -132,7 +125,7 @@
                 </div>
             </div>
         </div>
-    
+
     <!-- Page Content -->
     <section class="py-5">
         <div class="container align-items-center">
@@ -187,6 +180,7 @@
 
                 </div> --}}
 
+                <div class="container">
                 {{#if shops}}
                     <div>
                         <div class="row"></div>
@@ -196,7 +190,7 @@
                             <div class="column">
                                 <div class="card">
                                     <a href="{{posterURL}}" data-title="{{title}}" data-toggle="lightbox">
-                                        <img src="{{posterURL}}" alt="Poster unavailable" class="img-thumbnail img-fluid card-img-top image1">
+                                        <img src="{{posterURL}}" alt="Poster unavailable" onerror="this.src='/images/no-image.jpg'" class="img-thumbnail img-fluid card-img-top image1">
                                     </a>
                                     <a href="{{posterURL2}}" data-title="{{title}}" data-toggle="lightbox2">
                                         <img src="{{posterURL2}}" alt="Brand unavailable" onerror="this.src='/images/no-image.jpg'" class="img-thumbnail img-fluid image2">
@@ -232,7 +226,7 @@
             </div>
         </div>
     </section>
-
+</div>
     {{!-- <!-- Footer -->
     <footer class="page-footer font-small blockquote-footer">
 
@@ -244,6 +238,6 @@
 
     </footer>
     <!-- Footer --> --}}
-
+</div>
 
 <script src="/js/shop.js"></script>
