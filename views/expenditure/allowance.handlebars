@@ -18,7 +18,7 @@
 			</div>
 			<div class="form-group mb-4">
 				<label class="font-italic" for="story">Current Balance</label>
-				<textarea class="form-control" id="story" name="story" rows="4" disabled ></textarea>
+				<textarea class="form-control" id="story" name="story" rows="4" disabled >{{money}}</textarea>
 			</div>
 
 			<div class="form-group">
@@ -41,11 +41,16 @@
                         	</div>
                         	</div>
                         	<br>
-						<label class="font-italic">Set Warning Amount</label>
+						<label class="font-italic">Set Warning Amount  ( in % if you have chosen Percentage! )</label>
                         <textarea class="form-control" id="warnAllowance" name="warningAmt" rows="1"></textarea>
 					</div>
-					<div class="col-12 col-sm-12 col-md-12 col-lg-6">
+					<div class="col-12 col-sm-12 col-md-12 col-lg-7">
 						<label class="font-italic"></label>
+
+						<div>
+
+                                                	</div>
+
 
 					</div>
 			<div class="form-group">
@@ -54,18 +59,7 @@
 					</div>
 
 
-					<div class="col-12 col-sm-12 col-md-6 col-lg-6">
-						<label class="font-italic">Warning System</label>
-						<br>
-                        <div class="form-check form-check-inline">
-                        	<input class="form-check-input" type="checkbox" id="G" value="SMS" name="warningMethod" checked>
-                        	<label class="form-check-label" for="G">SMS</label>
-                        </div>
-                        <div class="form-check form-check-inline">
-                        	<input class="form-check-input" type="checkbox" id="PG" value="Email" name="warningMethod">
-                        	<label class="form-check-label" for="PG">E-mail</label>
-                        </div>
-					</div>
+
 				</div>
 
 			</div>

@@ -18,8 +18,7 @@
             type="text" id="myInput" onkeyup="searchFood()" placeholder="Search for food..">
 
         <ul id="myUL" style="list-style-type: none;">
-            <li><button  data-toggle="modal" data-target="#myModal"><img
-                        src="/img/add2.png"
+            <li><button data-toggle="modal" data-target="#myModal"><img src="/img/add2.png"
                         style="width: 28px;margin-right: 8px; display:inline-block; margin-bottom:4px; !important">Add
                     Your Own Item</button></li>
             <!-- Modal -->
@@ -28,17 +27,22 @@
                     <!-- Modal content-->
                     <div class="modal-content">
                         <div class="modal-header">
-                            <h4 style="padding-left:0px;"class="modal-title ">Add a food item</h4>
+                            <h4 style="padding-left:0px;" class="modal-title ">Add a food item</h4>
                         </div>
                         <div class="modal-body">
                             <form action="/cupboard/addfood" method="post" style="display: block;">
-							<div class="form-group">
-                                <label >Food Item</label>
-								<input type="name" name="fooditem" id="fooditem" tabindex="1" class="form-control"
-									placeholder="Food Name" required>
-							</div>
-							<button type="submit" class="btn btn-primary">Submit</button>
-						</form>
+                                <div class="form-group">
+                                    <label>Food Item</label>
+                                    <input type="name" name="fooditem" id="fooditem" tabindex="1" class="form-control"
+                                        placeholder="Food Name" required>
+                                    <br>
+                                        <label>Food Price</label>
+                                        <input type="name" name="foodPrice" id="foodprice" tabindex="2"
+                                            class="form-control" placeholder="Food Price">
+
+                                </div>
+                                <button type="submit" class="btn btn-primary">Submit</button>
+                            </form>
                         </div>
                         <div class="modal-footer">
                             <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
@@ -48,7 +52,7 @@
 
                 </div>
             </div>
-            
+
             {{#each fooddatabase}}
             <li><button data-toggle="modal" data-target="#myModal2" id="modalbtn"
                     value="{{fooditem}}">{{fooditem}}</button></li>
@@ -114,11 +118,11 @@
         }
     }
     $('#datepicker').datepicker({
-		value: new Date().toLocaleDateString('en-GB'),
-		format: 'dd/mm/yyyy',
-		uiLibrary: 'bootstrap4',
-	});
-    $('body').on('click', '#modalbtn', function(){
+        value: new Date().toLocaleDateString('en-GB'),
+        format: 'dd/mm/yyyy',
+        uiLibrary: 'bootstrap4',
+    });
+    $('body').on('click', '#modalbtn', function () {
         var elem = this.value;
         $('#food').val(elem);
         $('#modaltitle').text(elem)

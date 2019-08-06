@@ -13,6 +13,9 @@ const allowance = db.define('allowance',{
     },
     warning_mtd:{
         type:Sequelize.STRING
+    },
+    spending:{
+        type: Sequelize.DECIMAL
     }
 });
 

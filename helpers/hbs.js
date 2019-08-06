@@ -24,7 +24,7 @@ module.exports = {
 	},
 	
 	isadmin:function(classification) {
-		if (classification == "admin"){
+		if (classification == "Admin"){
 			return '<li class="nav-item"><a href="/shop/adminShop" class="nav-link">Admin Shop</a></li>'
 		}
 		else {

@@ -1,5 +1,6 @@
 const express = require('express');
 const router = express.Router();
+const allowance = require('../models/Allowance');
 const Cupboard = require('../models/Cupboard');
 const FoodDatabase = require('../models/FoodDatabase');
 const FoodCategory = require('../models/FoodCategory');
@@ -486,6 +487,14 @@ router.post('/addfood/:category', ensureAuthenticated, (req, res) =>{
 
 router.post('/addfood', ensureAuthenticated, (req, res) =>{
     let fooditem = req.body.fooditem;
+    let foodPrice = req.body.foodPrice;
+    allowance.findAll({where:{id:1}}).then(amount => {
+        var money = parseInt(amount[0].allowance);
+        money = money - parseInt(foodPrice);
+        allowance.update({allowance:money,},{where:{id:1}});
+        var spending = parseInt(amount[0].spending) + parseInt(foodPrice);
+        allowance.update({spending:spending},{where:{id:1}});
+    });
     FoodDatabase.create({
         fooditem
     },
