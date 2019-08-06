@@ -67,33 +67,6 @@ h3{
 </div>
 
 <script>
-const nodemailer = require('nodemailer');
-var transporter = nodemailer.createTransport({
-		service: 'gmail',
-		auth: {
-			user: 'ziyi527@gmail.com',
-			pass: 'a31180127'
-		}
-	});
-	var mailOptions = {
-		from: 'ziyi527@gmail.com',
-		to: '760128226@qq.com',
-		subject: 'Expiring',
-		text: 'Something is expiring! Please check!!!'
-	};
-	var date = new Date();
-	var current_hour = date.getHours();
-	var time = parseInt(current_hour);
-	console.log(current_hour);
-	console.log(time);
-	if ( time === 18 ){
-		transporter.sendMail(mailOptions, function(error, info){
-			if (error) {
-				console.log(error);
-			} else {
-				console.log('Email sent: ' + info.response);
-			}
-		});
-	}
+
 </script>
 

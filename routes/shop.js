@@ -6,7 +6,7 @@ const fs = require('fs');
 const upload = require('../helpers/imageUpload');
 const upload2 = require('../helpers/imageUpload');
 const mySQLDB = require('../config/DBConfig');
-const alertMessage = require('../helpers/messenger')
+const alertMessage = require('../helpers/messenger');
 const moment = require('moment');
 const Shop = require('../models/Shop');
 

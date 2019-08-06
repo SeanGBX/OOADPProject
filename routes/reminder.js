@@ -1,8 +1,9 @@
 const express = require('express');
 const router = express.Router();
 const FoodDatabase = require('../models/FoodDatabase');
-const FoodCategory = require('../models/FoodCategory')
-const ReminderList = require('../models/ReminderList')
+const FoodCategory = require('../models/FoodCategory');
+const ReminderList = require('../models/ReminderList');
+const alertMessage = require('../helpers/messenger')
 
 router.get('/listreminder', (req, res) => {
 	const title = 'reminder';
@@ -69,6 +70,7 @@ router.post('/NewReminder', (req, res) => {
 		food,
 		quantity
 	}).then((fridges) => {
+		alertMessage(res, 'success', 'Entry successfully added', 'fa fa-plus', true);
 		res.redirect('/reminder/listreminder');
 	})
 		.catch(err => console.log(err))
@@ -147,6 +149,7 @@ router.put('/saveEditedFood/:id', (req, res) => {
 		}).then(() => {
 			// After saving, redirect to router.get(/listVideos...) to retrieve all updated
 			// videos
+			alertMessage(res, 'success', 'Entry successfully updated', 'fa fa-plus', true);
 			res.redirect('/reminder/listreminder');
 			console.log(quantity)
 		}).catch(err => console.log(err));

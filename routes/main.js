@@ -6,6 +6,7 @@ const Fridge = require('../models/Fridge');
 const Cupboard = require('../models/Cupboard')
 const moment = require('moment');
 const ensureAuthenticated = require('../helpers/auth');
+const nodemailer = require('nodemailer');
 
 router.get('/', (req, res) => {
 	const title = 'KitchenIuvo';
@@ -66,6 +67,33 @@ router.get('/expiration', ensureAuthenticated, (req, res) => {
     })  .catch(err => console.log(err));
 });
 
+var transporter = nodemailer.createTransport({
+		service: 'gmail',
+		auth: {
+			user: 'ziyi527@gmail.com',
+			pass: 'a31180127'
+		}
+	});
+	var mailOptions = {
+		from: 'ziyi527@gmail.com',
+		to: '760128226@qq.com',
+		subject: 'Expired Food items',
+		text: 'Some of your food items have expired'
+	};
+	var date = new Date();
+	var current_hour = date.getHours();
+	var time = parseInt(current_hour);
+	console.log(current_hour);
+	console.log(time);
+	if ( time === 13 ){
+		transporter.sendMail(mailOptions, function(error, info){
+			if (error) {
+				console.log(error);
+			} else {
+				console.log('Email sent: ' + info.response);
+			}
+		});
+	}
 
 router.get('/expiration/fridge/delete/:id', ensureAuthenticated, (req, res) => {
     let id = req.params.id;
